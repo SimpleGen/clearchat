@@ -1,21 +1,29 @@
 import discord
+from discord.ext.commands import Bot
 from discord.ext import commands
+import asyncio
+import time
 
-TOKEN = "NDUxMDQ3Mjc3NzQyNjUzNDQw.Dv9xTg.St_HohH5dv-sqZn-_7aoNRUwHoQ"
-client = commands.Bot(command_prefix=".")
+Client = discord.Client()
+client = commands.Bot(command_prefix = "?")
 
+chat_filter = ["PINEAPPLE", "APPLE", "CHROME"]
+bypass_list = []
 
 @client.event
 async def on_ready():
-    print("bot online.")
+    print("Bot is online and connected to Discord")
 
-@client.command(pass_context=True)
-async def clear(ctx, amount=100):
-    channel = ctx.message.channel
-    messages = []
-    async for message in client.logs_from(channel, limit=int(amount) + 1):
-        messages.append(message)
-    await client.delete_messages(messages)
-    await client.say("DELETED")
+@client.event
+async def on_message(message):
+    contents = message.content.split(" ") #contents is a list type
+    for word in contents:
+        if word.upper() in chat_filter:
+            if not message.author.id in bypass_list:
+                try:
+                    await client.delete_message(message)
+                    await client.send_message(message.channel, "**Hey!** You're not allowed to use that word here!")
+                except discord.errors.NotFound:
+                    return 
 
 client.run("NDUxMDQ3Mjc3NzQyNjUzNDQw.Dv9xTg.St_HohH5dv-sqZn-_7aoNRUwHoQ")
