@@ -26,4 +26,4 @@ async def on_message(message):
                 except discord.errors.NotFound:
                     return 
 
-client.run("NDUxMDQ3Mjc3NzQyNjUzNDQw.Dv9xTg.St_HohH5dv-sqZn-_7aoNRUwHoQ")
+client.run("NTAwNzQxMjU1MjgyNjg4MDEw.Dv90xg.GK9o4veJiAB_PwCddnrHaFdhTq8")
