@@ -7,7 +7,7 @@ import time
 Client = discord.Client()
 client = commands.Bot(command_prefix = "?")
 
-chat_filter = ["PINEAPPLE", "APPLE", "CHROME"]
+chat_filter = ["CUNT", "BITCH", "FOTZE", "NIGGER", "JUDE", "SS", "HITLER", "ADOLF", "ADOLF HITLER", "NIGGA", "SLAVE", "SKLAVE", "JEWS", "KZ"]
 bypass_list = []
 
 @client.event
@@ -22,7 +22,7 @@ async def on_message(message):
             if not message.author.id in bypass_list:
                 try:
                     await client.delete_message(message)
-                    await client.send_message(message.channel, "**Hey!** You're not allowed to use that word here!")
+                    await client.send_message(message.channel, "**YOU ARE CUTE**")
                 except discord.errors.NotFound:
                     return 
 
