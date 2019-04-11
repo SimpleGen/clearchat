@@ -355,4 +355,4 @@ async def on_member_join(member):
         role = discord.utils.get(member.server.roles, name="NonVerified")
         await client.add_roles(member, role)
 
-client.run("NTY1NTY4Njk2NDAwMjE2MDg0.XK4VNA.ONgB-oZWw0qBM1E80AbunOV4gPE")
+client.run("NTQ2MDc0OTEyMTAwNzEyNDQ4.XK8wGw.fS13t3uJeSwD055nvu3QJpSiies")
