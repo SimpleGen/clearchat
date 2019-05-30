@@ -6,1150 +6,865 @@ import time
 import random
 from discord import Game
 
-
-TOKEN = "NTQ2MDc0OTEyMTAwNzEyNDQ4.D0i7dA.VuUbr7z0IWkl_45lqOfFehwWcZU"
-client = commands.Bot(command_prefix=".")
+TOKEN = "NTgxODA5ODU1OTU0NjgxODc2.XOmTnA.PRpqxPuMCQzHT-SqJES7lsZhMcQ"
+client = commands.Bot(command_prefix="-")
 
 Client = discord.client
 Clientdiscord = discord.Client()
 
-testmsgid = None
-testmsguser = None
-botmsg = None
-msg = None
-
-chat_filter = ["CUNT", "BITCH", "FOTZE", "NIGGER", "SCHLAMPE", "HUSO", "HURENSOHN", "JUDE", "SS", "HITLER", "ADOLF", "ADOLF HITLER", "NIGGA", "SLAVE", "SKLAVE", "JEWS", "KZ"]
-bypass_list = []
-
 @client.event
 async def on_ready():
-    await client.change_presence(game=Game(name="-help"))
-    print ("I am running on " + client.user.name)
-    print ("With the ID: " + client.user.id)
+    print ("I am running on")
+    await client.change_presence(activity=discord.Game(name="-gen | 7sek"))
 
-@client.event
-async def on_message(message):
-    contents = message.content.split(" ")  # contents is a list type
-    for word in contents:
-        if word.upper() in chat_filter:
-            if not message.author.id in bypass_list:
-                try:
-                    await client.delete_message(message)
-                    emb = (discord.Embed(description="**THIS IS NOT COOL**", color=0x2DF270))
-                    emb.add_field(name="**You have be warned! When you swaer one more time you are getting muted!**", value="so stop it, and read our discord rules!", inline=True)
-                    await client.send_message(message.channel, embed=emb)
-                except discord.errors.NotFound:
-                     return
+#MINECRAFT
+#MINECRAFT
+#MINECRAFT
+#MINECRAFT
 
-    if "!uplay" in message.content.lower():
-        if "563954418794627094" in [role.id for role in message.author.roles]:
-            if (message.channel.id == "553550376595619840"):
-                variable = [
-                    "totalspartan58@gmail.com:kyle1230",
-                    "teshone00@gmail.com:cam1152114",
-                    "jacob.hagelq@hotmail.se:jahjah09",
-                    "pnotching@gmail.com:renate77",
-                    "kgaska9@gmail.com:orzelek987",
-                    "bremenpascal@web.de:Werder1710",
-                    "Nate.1.lehrke@gmail.com:Irongut1",
-                ]
-                await client.send_message(message.author, (random.choice(variable)))
-            else:
-                await client.wait_for_message(timeout=10)
-                await client.delete_message(message)
-                await client.send_message(message.channel, "Type **donate** in the chat to buy the Simple rank")
-        else:
-            await client.send_message(message.channel, "Type **donate** in the chat to buy the Simple rank")
+@client.command()
+@commands.has_permissions(send_messages=True)
+async def minecraft(ctx, member: discord.Member = None):
+    if not member:
+        await ctx.send("Please type you name! -minecraft @name")
+        return
+    channel = discord.utils.get(member.guild.channels, name="generator-log")
+    emb = (discord.Embed(description="Account Generator", color=0x2DF270))
+    emb.add_field(name=f"A user created a Minecraft account", value=member.display_name, inline=False)
+    emb.add_field(name=f"and the id is {member.mention}", value="check it", inline=False)
+    await channel.send(embed=emb)
+    await ctx.send("I send a Account to your DMs, please wait a bit. (I do allown the accs so i cant  refill it all weekends)")
+    await asyncio.sleep(3)
+    choices = [
+        "jeason3bb@gmail.com:baba6635",
+        "monterojalysa@yahoo.com:jalysa23",
+        "nickpilotte7@live.com:ilygussyyes7",
+        "jeason3bb@gmail.com:baba6635",
+        "monterojalysa@yahoo.com:jalysa23",
+        "sennabravenboer@gmail.com:braaf206",
+        "thebadster@hotmail.com:Clippers11",
+        "stefanpaccaud@gmail.com:Stefan0122",
+        "monterojalysa@yahoo.com:jalysa23",
+    ]
+    rancoin = random.choice(choices)
+    await ctx.author.send(rancoin)
+    role = discord.utils.get(ctx.guild.roles, name="muted")
+    await member.add_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker Lite")
+    await member.remove_roles(role)
+    await asyncio.sleep(3600)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.add_roles(role)
 
-    if "!fortnite" in message.content.lower():
-        if "544185564275146813" in [role.id for role in message.author.roles]:
-            if (message.channel.id == "553550376595619840"):
-                variable = []
-                await client.send_message(message.author, (random.choice(variable)))
-            else:
-                await client.wait_for_message(timeout=10)
-                await client.delete_message(message)
-                await client.send_message(message.channel, "Type **donate** in the chat to buy the Simple rank")
-        else:
-            await client.send_message(message.channel, "Type **donate** in the chat to buy the Simple rank")
+@minecraft.error
+async def minecraft_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await channel.send(f"You do not have enough permissions {member.mention}")
 
-    if "!minecraft" in message.content.lower():
-        if "544930512209444876" in [role.id for role in message.author.roles]:
-            if (message.channel.id == "553550376595619840"):
-                variable = []
-                await client.send_message(message.author, (random.choice(variable)))
-            else:
-                await client.wait_for_message(timeout=10)
-                await client.delete_message(message)
-                await client.send_message(message.author, "use the #❗»-generator channel")
-        else:
-            await client.send_message(message.channel, "Subscribe `yCode` and send Moderator or a Admin a Screen!")
+#SPOTIFY
+#SPOTIFY
+#SPOTIFY
+#SPOTIFY
 
-if "!spotify" in message.content.lower():
-    if "544930512209444876" in [role.id for role in message.author.roles]:
-        if (message.channel.id == "553550376595619840"):
-            variable = [
-                "e_selam@yahoo.com:3600",
-                "juz24_tine@yahoo.com:roxyrose",
-                "Ayanalady614@yahoo.com:loverpooh",
-                "virusjun2@yahoo.com:boomaui",
-                "wickedson66@yahoo.com:218078",
-                "danread7@yahoo.com:eee7385",
-                "jljacques2@yahoo.com:1michele",
-                "adunsmor1@yahoo.com:allison1",
-                "synicyde@yahoo.com:intolerance",
-                "gpark75@yahoo.com:gardenia",
-                "farzin.tirgar@yahoo.com:123456",
-                "rriley0427@yahoo.com:jordan0427",
-                "heckycolazo@yahoo.com:favour",
-                "twistedkornkid66@yahoo.com:qazzaq",
-                "kevsoles@yahoo.com:morgus",
-                "deannacaprini@yahoo.com:xena1982",
-                "aynurs06@yahoo.com:121518",
-                "moorebrandon33@yahoo.com:curtychew",
-                "hannahbrady@yahoo.com:thailand08",
-                "biancadiaz08@yahoo.com:09181989",
-                "charlietaylorjr@yahoo.com:124255fbds",
-                "jforey13@yahoo.com:jxj1313",
-                "fa_armywife@yahoo.com:allana22",
-                "judfan101@yahoo.com:sampson",
-                "christophizzle4@yahoo.com:son123",
-                "jpbeaudin@yahoo.com:godzilla2000",
-                "hnsoares@yahoo.com:tinbird28",
-                "theradicalwriter@yahoo.com:121187",
-                "jmedrano76@yahoo.com:1badmex26",
-                "alix3cia@yahoo.com:love2589",
-                "twdsuper@yahoo.com:529707",
-                "manowelborn@yahoo.com:shaniah06",
-                "majah_pearl@yahoo.com:janebantoc",
-                "rayc_ray@yahoo.com:ray623",
-                "shaquelaboyd@yahoo.com:december13",
-                "aayatullahi@yahoo.com:Adam45",
-                "rlarkin_06@yahoo.com:mariah",
-                "vwattsup@yahoo.com:100watts",
-                "langford_1979@yahoo.com:hello27",
-                "pjea090@yahoo.com:graham",
-                "gphio_ximo1@yahoo.com:houston1",
-                "henrycisneros89@yahoo.com:mafioso89",
-                "jondaman54@yahoo.com:sidekick3",
-                "kingdimmd82@yahoo.com:edgar1",
-                "misz_mieyzuera86@yahoo.com:z07686",
-                "gabrielvinzent@yahoo.com:nov162005",
-                "dat_nigga_roy@yahoo.com:solomon",
-                "suhwit_babe@yahoo.com:162889",
-                "furioku69@yahoo.com:dbzdbz",
-                "stonecold10189@yahoo.com:yankees31",
-                "j.hauser27@yahoo.com:hockey27",
-                "angelica1428@yahoo.com:poohbear87",
-                "ckep1976@yahoo.com:guitar76",
-                "malupit_3@yahoo.com:kamekaze",
-                "chiefscottus@yahoo.com:beanie",
-                "mpamaran@yahoo.com:Singap0re",
-                "mylenediciembre719@yahoo.com:lemyne22",
-                "joey_golamco@yahoo.com:andrea415",
-                "spear0w@yahoo.com:komputer",
-                "damiansully@yahoo.com:kundalini",
-                "jsugail@yahoo.com:robert48",
-                "jburkhart37@yahoo.com:007lurch",
-                "delicia.harris@yahoo.com:dhluv4tj",
-                "maryana_ha@yahoo.com:challenger",
-                "jurassicpark_1999@yahoo.com:rusty1",
-                "bacnberger@yahoo.com:buddy17",
-                "lmcneal28@yahoo.com:dayja01",
-                "rthomas08@yahoo.com:georgia08",
-                "dixietruckr@yahoo.com:2001f250",
-                "shelbyschanaman@yahoo.com:loveable12",
-                "blastfaizu2@yahoo.com:nobuyus",
-                "littletom12957@yahoo.com:shortman",
-                "mgtilk@yahoo.com:lilwayne",
-                "gakibapi@yahoo.com:imagineering",
-                "bryancoog0719@yahoo.com:ashlynn1",
-                "dyshanaerobinson@yahoo.com:vanessa",
-                "whitstr09@yahoo.com:ch3rryma",
-                "bbgood92@yahoo.com:brynn1",
-                "yume_erysd@yahoo.com:eds459",
-                "deerhuntr04@yahoo.com:stealth",
-                "sarbu_192@yahoo.com:handsom",
-                "charlescruz1986@yahoo.com:clapback",
-                "charlescruz1986@yahoo.com:clapback",
-                "addyphonasa@yahoo.com:kaitlinh1",
-                "kuisma_8@yahoo.com:ginger88",
-                "real.cripsz24@yahoo.com:cripside",
-                "pancake.1959@yahoo.com:6959cake",
-                "kcxcbb5@yahoo.com:trexit5",
-                "papitchy@yahoo.com:fuckkkkk",
-                "mohdyuzreen@yahoo.com:dav2065",
-                "enanotomix@yahoo.com.mx:predacons",
-                "jpeso43@yahoo.com:eagles",
-                "body_pump69@yahoo.com:sildenafil",
-                "w_donner@yahoo.com:shamokin",
-                "britni4love@yahoo.com:gina9909",
-                "youngmagic2@yahoo.com:123qwe",
-                "tony_sumartono@yahoo.com.sg:mandar21",
-                "alexwarr75@yahoo.com:bubbles75",
-                "ramer_alvaran@yahoo.com:RAMRED",
-                "joe_ann_louise@yahoo.com:rugtoy007",
-                "ngandinh89@yahoo.com:hlhbn122",
-                "angging@yahoo.com:angging",
-                "cameronmaghami@yahoo.com:fuckyou12",
-                "nfields43@yahoo.com:pmw4life",
-                "ritchdawg24@yahoo.com:eileen66",
-                "trudylou2000@yahoo.com:spriggy",
-                "rafgonz43@yahoo.com:26532653",
-                "oakdeja@yahoo.com:dlw143",
-                "jalam007@yahoo.com:lemon722",
-                "johngretch1245@yahoo.com:minnoo",
-                "prakash35@yahoo.com:liverp001",
-                "singleton3312@yahoo.com:sandra62",
-                "roshongibson@yahoo.com:new2you",
-                "smashingfalcor@yahoo.com:schumacher",
-                "jhnmuso@yahoo.com.au:italian1",
-                "juaniaguilera@yahoo.com.ar:humoprick",
-                "jalenwilliams52@yahoo.com:blacklips9",
-                "marie2989@yahoo.com:marie1",
-                "morphios3@yahoo.com:landlr3",
-                "cvalenzu7@yahoo.com:10548465",
-                "volfan0118@yahoo.com:05210923",
-                "beautifullbeatrice@yahoo.com:091503",
-                "maggiebgooden@yahoo.com:maylee42",
-                "ahmadnazirul@yahoo.com:kaiser19",
-                "mstdk78@yahoo.com:jumper78",
-                "musico@yahoo.com:musico",
-                "jellybean5703@yahoo.com:polo419",
-                "dilkirani678@yahoo.com:samia1989",
-                "kolmisfit@yahoo.com:abc123",
-                "electricdrip1488@yahoo.com:tightenup",
-                "dschalow71@yahoo.com:spencer01",
-                "raven_frozen15@yahoo.com:raven123",
-                "msshea4@yahoo.com:celest44",
-                "showguy77@yahoo.com:janjan",
-                "adolph_gallegos2000@yahoo.com:sydney",
-                "jjastan@yahoo.com:jologs",
-                "mayfa99@yahoo.com:maya2002",
-                "michael.roginski@yahoo.com:sigmund1",
-                "zack_jz566@yahoo.com:blackgear",
-                "mantukasz99@yahoo.com:mantas",
-                "jamescgrady@yahoo.com:mopar70",
-                "arshellan@yahoo.com:shaela13",
-                "carlamayfieldcm@yahoo.com:ginger777",
-                "jeffreyphillips1965@yahoo.com:tentflow18",
-                "nimapafio70@yahoo.com:confidence2",
-                "Fransthe1@Yahoo.com:gp021488",
-                "mayme.neech@yahoo.com:ruthven",
-                "shakitaferguson@yahoo.com:openclub05",
-                "brentmeche@yahoo.com:mazda03",
-                "chatwithfolykay@yahoo.com:kayode",
-                "slash15gnr@yahoo.com:slash161",
-                "flaca10458@yahoo.com:poti735",
-                "fingersaves2000@yahoo.com:soccer21",
-                "pdmather@yahoo.com:bollox",
-                "wonderweed2004@yahoo.com:4100124",
-                "lisaernlund1@yahoo.com:lisa8453",
-                "Soraisdaking@yahoo.com:jenova",
-                "leejorae@yahoo.com:movies",
-                "pe_yangdalhour@yahoo.com:patlikuhl",
-                "joyjoy@yahoo.com:joyjoy",
-                "lhgodoy@yahoo.com:godoy123",
-                "jardine51050@yahoo.com:jayden01",
-                "mkescano@yahoo.com:malitbog",
-                "narutoxxninja@yahoo.com:a787555",
-                "josh4950@yahoo.com:iceman123",
-                "Tonia_blessed@yahoo.com:Devryu09",
-                "ayarci11@yahoo.com:2422519",
-                "jg_4826@yahoo.com:hobbit45",
-                "inara_1500@yahoo.com.ph:czx514ro",
-                "florin_cipmar@yahoo.com:viorica",
-                "epagnucc@yahoo.com:jordan23",
-                "masterkey_gen@yahoo.com:shyrshyr",
-                "mufitneftci@yahoo.com:20001900",
-                "roberthayward11@yahoo.com:robert11",
-                "nitwhit26@yahoo.com:spookie08",
-                "blessed@yahoo.com:blessed",
-                "bobcat752000@yahoo.com:Germany05",
-                "flexizzel@yahoo.com:chantilly1",
-                "rld1027@yahoo.com:qwerty10",
-                "chowie204@yahoo.com:trident1",
-                "jsp200268o@yahoo.com:sergio01",
-                "destrell1@yahoo.com:baseball101",
-                "rejhie_04@yahoo.com:110489",
-                "princeawill@yahoo.com:sidekick3",
-                "abjack12@yahoo.com:iotwc12",
-                "wala_ako11@yahoo.com:hugs0226",
-                "mermaid8116@yahoo.com.sg:spring81",
-                "ericd.wbsd@yahoo.com:bbooc44y",
-                "dormique@yahoo.com:bronzeroad48",
-                "thatgooch79@yahoo.com:l06212003",
-                "silencer_v@yahoo.com:reiayanami",
-                "illapaco@yahoo.com:sexo00",
-                "ckitts723@yahoo.com:july231988",
-                "daniel_060113@yahoo.com.my:aini5524",
-                "ibaloiller@yahoo.com:1qw2e3r",
-                "angela26292@yahoo.com:892163b",
-                "clyde_denzel@yahoo.com:hustla101",
-                "quantum_org@yahoo.com:721125",
-                "ogpereira2007@yahoo.com.br:ops123",
-                "laurenshep06@yahoo.com:classof06",
-                "Sabrinatiffa@yahoo.com:121192",
-                "secret_life_of_amaranth@yahoo.com:marinda",
-                "blue2flue@yahoo.com:123456",
-                "chris_burdette63@yahoo.com:bananas4",
-                "scmiller_144@yahoo.com:beatdadrum",
-                "jeromednn@yahoo.com:121597",
-                "mattman0396@yahoo.com:babylily0396",
-                "j_blackwind@yahoo.com:j314159276",
-                "cridgeway92@yahoo.com:cupcake92",
-                "lalaw1917@yahoo.com:sydni0189",
-                "generaal_jc@yahoo.com:qwerty123456",
-                "rickshawbell@yahoo.com:nascar88",
-                "cloverdale1477@yahoo.com:Kalista1",
-                "redstoneslimited@yahoo.com:nb567574",
-                "haidashamsuri@yahoo.com:100785",
-                "crich892003@yahoo.com:noonie128",
-                "geraldzkee2006@yahoo.com.ph:342424",
-                "kary12202002@yahoo.com:yessenia1",
-                "Mztrice254@yahoo.com:jalesia",
-                "farhana_kamaruddin@yahoo.com:hahnenfuss",
-                "haavimurflis@yahoo.com:020273",
-                "gjsr216@yahoo.com:camaro",
-                "laeparker@yahoo.com:diaz1141",
-                "mabz_duce@yahoo.com:balderdash",
-                "florin_chello2008@yahoo.com:dickhead",
-                "loouuridr@yahoo.com:andrei11",
-                "avysma911@yahoo.com:avery1",
-                "ellanox@yahoo.com:angela",
-                "tbelt26@yahoo.com:password",
-                "billyk142857@yahoo.com.hk:6c08118",
-                "m6r6a6@yahoo.com:19881367",
-                "droc724@yahoo.com:outcold",
-                "medicpm2001@yahoo.com:metro38",
-                "waynesimple@yahoo.com.hk:2100841908",
-                "adelinewjp@yahoo.com.sg:4oxyr0xy",
-                "crapsguy58@yahoo.com:thk22758",
-                "azrul_037@yahoo.com:muassyarah",
-                "radogna0071v@yahoo.com:viper007",
-                "aserbin13@yahoo.com:maurice13",
-                "thomas_farley2008@yahoo.com:nicole09",
-                "kacmom46366@yahoo.com:brighteyes",
-                "dukehallmark@yahoo.com:smokes1",
-                "corey_poncedeleon@yahoo.com:yeroc2490",
-                "red_taurus30@yahoo.com:198080",
-                "alyssalipps@yahoo.com:speedy01",
-                "chucky_donta@yahoo.com:chucky123",
-                "Champalex812@yahoo.com:a659186",
-                "ohyeahwhammy@yahoo.com:redsox1",
-                "rj_jardeleza18@yahoo.com:1810rj10",
-                "cma338@yahoo.com:acorn1234",
-                "v_vragovski@yahoo.com:ferari",
-                "ikwan371@yahoo.com:iwan2484",
-                "ozgurtureli@yahoo.com:10121012",
-                "mak_642001@yahoo.com:perspolis",
-                "bmcclell23@yahoo.com:fungos",
-                "hotknickfan@yahoo.com:knicks",
-                "teley555@yahoo.com:tyty555",
-                "t_dogg2420@yahoo.com:infinity1",
-                "lizzlefizzie@yahoo.com:emerger86",
-                "lizzlefizzie@yahoo.com:emerger86",
-                "aimee_cia@yahoo.com:04281994",
-                "coolguy_usman@yahoo.com:1234qwer",
-                "david_t_fenske@yahoo.com:fenske",
-                "p.dbradley1@yahoo.com:3101501",
-                "c_pontesor@yahoo.com:carac3",
-                "mmdp86@yahoo.com:210586",
-                "YJsnowman437@yahoo.com:593599",
-                "kecyx_shah@yahoo.com:terminal",
-                "s_carey2008@yahoo.com:tinker08",
-                "pingu4liv@yahoo.com:beauty",
-                "tonymianulli@yahoo.com:bigballen1",
-                "kristen.smith89@yahoo.com:colgate1",
-                "angiemo84@yahoo.com:pumpkin22",
-                "step0007@yahoo.com:babies04",
-                "latifa5781@yahoo.com:kaktan21",
-                "xlizziexhooverx7@yahoo.com:nigro8",
-                "einemal@yahoo.com:alex00",
-                "jasmin.white@yahoo.com:jass23",
-                "tarheelt107@yahoo.com:pistolpete",
-                "kenpepper26@yahoo.com:derky426",
-                "fearmelol48@yahoo.com:merlin211",
-                "elbaskin@yahoo.com:jazz111",
-                "limexxvii@yahoo.com:herrera",
-                "igo2serina@yahoo.com:fwgocc1",
-                "marloubarabar@yahoo.com:031576",
-                "travelkeys@yahoo.com:ktogsucks",
-                "dtd500@yahoo.com:beastdtd",
-                "miracle014@yahoo.com:hot123",
-                "rz_scorp@yahoo.com:wmf14999",
-                "glacious_99@yahoo.com:iceman99",
-                "jasmineflower32@yahoo.com:adrian2002",
-                "hoodhoppa135@yahoo.com:1me2you3us",
-                "aishahousman@yahoo.com:calvin22",
-                "kentrellalexander@yahoo.com:blue94",
-                "primozicsb14@yahoo.com:dzgal214",
-                "sikeston1213@yahoo.com:sikeston",
-                "jayc0l@yahoo.com:asshole",
-                "arieskck@yahoo.com:610000",
-                "angela92nguyen@yahoo.com:thethe",
-                "selman_asik@yahoo.com:eminem",
-                "richellesaclot@yahoo.com:vistamar",
-                "whynmy@yahoo.com:invictus",
-                "stsebastian00@yahoo.com:2615492",
-                "olarndrafflesia@yahoo.com:akudankau7",
-                "yuno_0111@yahoo.com:987540",
-                "lung650417@yahoo.com.tw:kyle860512",
-                "courtneyrulez501@yahoo.com:courtney",
-                "paf01@yahoo.com:chhs4sc",
-                "wyomarty0@yahoo.com:guinness",
-                "evildoer247@yahoo.com:chromeo1",
-                "opksusa@yahoo.com:13051970",
-                "stephlja@yahoo.com:kandre",
-                "colorblindmini@yahoo.com:flubber",
-                "robin.strike@yahoo.com.br:blackon",
-                "tkozlowski73@yahoo.com:freddie",
-                "paysondad@yahoo.com:dodger",
-                "lala1705@yahoo.com:141725",
-                "muhimman@yahoo.com:muhammad",
-                "boladao_28@yahoo.com.br:201194",
-                "ray_jacksonjr@yahoo.com:shawn23",
-                "lia_crear@yahoo.com:jesus777",
-                "sizzleja2@yahoo.com:iluvajs1",
-                "charmainesmiley@yahoo.com:tiffany",
-                "sshah07424@yahoo.com:dell1234",
-                "angieangie587@yahoo.com:25528as",
-                "bobjohnson2662@yahoo.com:sugarbear",
-                "jessica_medina69@yahoo.com:010591",
-                "tchuppaman@yahoo.com:miezzu",
-                "allinson_777@yahoo.com:ladalad123",
-                "aim_cg@yahoo.com.mx:17017777",
-                "murphyemma2006@yahoo.com:36622006",
-                "afesguy@yahoo.com:kimchi72",
-                "seli059@yahoo.com.my:130059",
-                "bernadettebalan@yahoo.com:mahalko53",
-                "personaljesus34@yahoo.com:batcave36",
-                "mdclaire@yahoo.com:lovely",
-                "katiekisel77@yahoo.com:millerlite1",
-                "kaciwillis@yahoo.com:iloveyou33",
-                "swordmaster_misty@yahoo.com:polkadolka",
-                "omkar.london@yahoo.com:311983",
-                "yairofek@yahoo.com:ofek1975",
-                "los_831@yahoo.com:cenco831",
-                "tanchelle75@yahoo.com:snook12",
-                "demeza3@yahoo.com:tampabay3",
-                "aye79876a@yahoo.com:abigail25",
-                "niaoctavia12@yahoo.com:cheetahgirlz",
-                "julie_dimond@yahoo.com:hokeypokey",
-                "fresno22@yahoo.com:11271127",
-                "krichardson0614@yahoo.com:destiney4",
-                "rby987@yahoo.com:789123",
-                "cowjuan@yahoo.com:garofano1",
-                "car_dog_garage@yahoo.com:0toluca",
-                "nj_starry@yahoo.com:starrynight",
-                "jamaliah26@yahoo.com.sg:261275",
-                "cigdemcokan@yahoo.com:02082007",
-                "jwhit20042000@yahoo.com:jennifer",
-                "keks520@yahoo.com:morrie",
-                "are_jazz87boy@yahoo.com:jazz87",
-                "jandymeza@yahoo.com:chris89",
-                "my_agnes2k7@yahoo.com:forgot",
-                "blewish_girl@yahoo.com:eika1991",
-                "garrisonmp@yahoo.com:michael4",
-                "redman1799@yahoo.com:baseball",
-                "chalimar00@yahoo.com:shabba00",
-                "darksage881905@yahoo.com:sticknija1",
-                "frananjo05@yahoo.com.br:fsanti",
-                "gestigoy@yahoo.com:navigators",
-                "sapanu@yahoo.com:sapzal08",
-                "nairda72-1@yahoo.com:webpass",
-                "carlos_sl@yahoo.com:megawatt",
-                "kooncetia@yahoo.com:inthecut31",
-                "itslalyndsey@yahoo.com:power3",
-                "ritaantonascio@yahoo.com:rita1521",
-                "seadawg0831@yahoo.com:goober98",
-                "shizune717@yahoo.com:supercow1",
-                "penn_no1@yahoo.com:deathrow",
-                "pavilionmms@yahoo.com:622622",
-                "rocker4012@yahoo.com:raider56",
-                "alp_uz@yahoo.com:au0144a",
-                "cscreza@yahoo.com:molavi",
-                "mrstray420@yahoo.com:namzug",
-                "jeassyca.ngaditeja@yahoo.com:eleonora",
-                "strahinjic_ds@yahoo.com:medvedja",
-                "reddragon0205@yahoo.com:336699",
-                "reality04@yahoo.com:sammie",
-                "lucie05678@yahoo.com:hotdog",
-                "tarheals56@yahoo.com:wtpbikes",
-                "octavia142006@yahoo.com:octavia",
-                "kimberlychavez71@yahoo.com:emma12",
-                "prowess_24@yahoo.com:yenris",
-                "dpikeii@yahoo.com:darts33",
-                "mgyldz@yahoo.com:starbuck",
-                "mandooogurlx3@yahoo.com:mandoogook",
-                "yanksrul224@yahoo.com:baseba123",
-                "jun_cloa@yahoo.com:cs122399",
-                "kazcus@yahoo.com:Belgariad1",
-                "uhollandfour@yahoo.com:Holland4",
-                "jessewilson87@yahoo.com:clemson2",
-                "casillasangelo@yahoo.com:4858pw",
-                "chris27stout27@yahoo.com:keyboard27",
-                "jaymonster13@yahoo.com:2004ram",
-                "saintpauldavid@yahoo.com:matt6330",
-                "djfroy@yahoo.com:froy2301",
-                "averynicholas21@yahoo.com:gymdude23",
-                "nitaboo14@yahoo.com:danita16",
-                "hilcobroens@yahoo.com:crowbar666",
-                "tonysoccerasp91@yahoo.com:tony2010",
-                "ashley.joseph94@yahoo.com:desirae212",
-                "mario_j0se_valdez888@yahoo.com:mariojose",
-                "jkat_0219@yahoo.com:kingkong",
-                "obet_ragos@yahoo.com:etong123",
-                "jacobjones97@yahoo.com:drake1",
-                "myashtree@yahoo.com:115691",
-                "autumnbones@yahoo.com:jayden214",
-                "reydownes@yahoo.com:Hudson08",
-                "jeweler1977@yahoo.com:stacey76",
-                "brwneyedgirlmace@yahoo.com:jazmyn07",
-                "abg_designs@yahoo.com:dagwood",
-                "peppermintpattie22@yahoo.com:sierra1162",
-                "athirah410@yahoo.com:901004",
-                "bogdancapatina@yahoo.com:aide6make",
-                "cshell816@yahoo.com:Crndgg74",
-                "aniceto.lorelei@yahoo.com:lorelei123",
-                "lance_hghs@yahoo.com:hughdog2",
-                "mgarven25@yahoo.com:garvme19",
-                "kcairo56@yahoo.com:sisqo5608",
-                "cj_hagii@yahoo.com:hagiii",
-                "reygim_01@yahoo.com:glereyjur",
-                "platv2006@yahoo.com:ScoobyDoo",
-                "mahyar_he@yahoo.com:8800gt",
-                "tito_b415@yahoo.com:concdid1",
-                "amzver1@yahoo.com:030407",
-                "aydemirtozluyurt@yahoo.com.tr:14531071",
-                "rashamell2000@yahoo.com:rashamel",
-                "edsname03455@yahoo.com:raiders",
-                "cosmicom2000@yahoo.com:cosmin1984",
-                "catridr2000@yahoo.com:george22",
-                "karandinos@yahoo.com:123321mk",
-                "kbrenes96@yahoo.com:number1",
-                "tiplea84@yahoo.com:vasile84",
-                "dnllstrong@yahoo.com:jayden",
-                "neringuteee@yahoo.com:19871806",
-                "ernz77@yahoo.com:abcde757",
-                "sergio_gdelat@yahoo.com:222222",
-                "mz.jasz@yahoo.com:1mzjasz",
-                "jmurphy4677@yahoo.com:drdre666",
-                "bblay4@yahoo.com:oicu812",
-                "katriesh@yahoo.com:kateey1",
-                "doughboypillz@yahoo.com:dough08",
-                "dreli_20@yahoo.com:elias123",
-                "bwiw568@yahoo.com:reklwa1",
-                "dammy3000@yahoo.com:dami4u",
-                "chelew27@yahoo.com:thomas1928",
-                "annie111192@yahoo.com:luverne11",
-                "yeraniabarrios@yahoo.com:217645",
-                "neesi70@yahoo.com:joshben",
-                "butch145@yahoo.com:dawgs45",
-                "buttercup318043@yahoo.com:maddie9122",
-                "kel0217@yahoo.com:kelann01",
-                "utmel81@yahoo.com:braden04",
-                "racky_john@yahoo.com:tracy1",
-                "niyah92@yahoo.com:pink27",
-                "hotgurl_1104@yahoo.com:iloveme4",
-                "yungrad07@yahoo.com:christy1",
-                "nic_ng123@yahoo.com.sg:951753",
-                "jvpot@yahoo.com:090985",
-                "Kings_1015@yahoo.com:jojo1015",
-                "oakboi93@yahoo.com:payroll",
-                "brianb130@yahoo.com:zxcvbnm1",
-                "Angel86c@yahoo.com:Smiles1",
-                "blstz_5264@yahoo.com.my:taa123",
-                "blstz_5264@yahoo.com.my:taa123",
-                "paul_tristan429@yahoo.com:sharingan",
-                "nur_rasyiqah@yahoo.com:nrr220987",
-                "Kauisha@yahoo.com:bigish",
-                "jlevera@yahoo.com:779614",
-                "b.hall07@yahoo.com:chanay6",
-                "geo3232@yahoo.com:george27",
-                "amiraizzat77@yahoo.com:blue77",
-                "j.barnicle@yahoo.com:liverpool",
-                "bluebaycanyon@yahoo.com:forklift",
-                "ontha_dl2003@yahoo.com:cs60195",
-                "traviskissacdc@yahoo.com:coolest91",
-                "carpediemrz@yahoo.com:w18816",
-                "csibi_reka@yahoo.com:kiskutya",
-                "nadiakhussain@yahoo.com:sunflower",
-                "beachbabechic34@yahoo.com:jessica13",
-                "ciara09cece@yahoo.com:deshawna1",
-                "shelbyw_1993@yahoo.com:purple",
-                "massagimartinez@yahoo.com:alyssa1",
-                "ttheu@yahoo.com:taylor05",
-                "aznizanieyza@yahoo.com:860426",
-                "asb0923@yahoo.com:bongloads",
-                "ffjoec@yahoo.com:frontroom1",
-                "arsyaridwan@yahoo.com:224336",
-                "Latricelkb@yahoo.com:Lovely125",
-                "Bmejia3522@yahoo.com:Funny13",
-                "missbiggs30@yahoo.com:honeydip24",
-                "mi445566@yahoo.com:june82002",
-                "zhelga@yahoo.com:vida1111",
-                "srmrmm@yahoo.com:mbaby2",
-                "cythack@yahoo.com:spike78",
-                "madjstfou@yahoo.com:Melvin91",
-                "hernandez.alexiz@yahoo.com:a101010",
-                "stanisha29@yahoo.com:sunsettan",
-                "calisurf2008@yahoo.com:5700opal",
-                "numa2329@yahoo.com:track8",
-                "johnsama82@yahoo.com:sammer82",
-                "kfaggiano@yahoo.com:katie210",
-                "sexyduke90@yahoo.com:renelda90",
-                "carvergreen@yahoo.com:tiatre",
-                "rebocorny@yahoo.com.br:renata",
-                "strung_out80@yahoo.com:cherubim",
-                "demetrius.redding@yahoo.com:jamesr",
-                "ruselgun@yahoo.com:manowar",
-                "luizinhosantiago@yahoo.com:chiquilla1",
-                "danhaimckenzie@yahoo.com:9938060da",
-                "tiveyburks@yahoo.com:24352435",
-                "danitrani7@yahoo.com:florida",
-                "drekearse@yahoo.com:vikings1",
-                "crispereiracps@yahoo.com.br:032203",
-                "jasondplacetobe@yahoo.com:godfather",
-                "jimellefson@yahoo.com:char1ie",
-                "pinksrl@yahoo.com:september3",
-                "pinksrl@yahoo.com:september3",
-                "goodred2@yahoo.com:allpub31",
-                "sampson_cott@yahoo.com:daddys82",
-                "twintowers80@yahoo.com:4575",
-                "jadol_12@yahoo.com:badooy",
-                "darin1891@yahoo.com:fatgirl",
-                "reginald_gilbert@yahoo.com:31reggie",
-                "hobart_michael@yahoo.com:xxx420",
-                "tbdeepcover@yahoo.com:january26",
-                "sanderskg@yahoo.com:linksys23",
-                "cardsbigmac25@yahoo.com:jayhawk34",
-                "alisha_young0919@yahoo.com:tootsie09",
-                "edithadorno@yahoo.com:sept1989",
-                "ummicle@yahoo.com:spiderman",
-                "trixxxie_baby@yahoo.com:trix062204",
-                "morgannachuk@yahoo.com:cookie3",
-                "naj_2003@yahoo.com:superman",
-                "randi.dixon@yahoo.com:cupcake57",
-                "akonseant@yahoo.com:114276",
-                "joshchapmen@yahoo.com:konoha",
-                "demsol_demsol@yahoo.com:youallknow",
-                "myq425@yahoo.com:quella2001",
-                "johnnycamp10@yahoo.com:redmen",
-                "mgading74@yahoo.com:pussy1971",
-                "crystalb21@yahoo.com:ocean76",
-                "famance_13@yahoo.com:139145",
-                "carmen_piglet@yahoo.com:18031980",
-                "ramon_aquino69@yahoo.com:oongas",
-                "mhikma@yahoo.com:mandar",
-                "evboy88@yahoo.com:2007040",
-                "j_roberson_972@yahoo.com:dtexas972",
-                "tjcolina@yahoo.com:godsfavor",
-                "cassy1238@yahoo.com:kittycass",
-                "Nswingfan@yahoo.com:piper0518",
-                "el_mar_y_sol@yahoo.com:kael2008",
-                "krazteka13@yahoo.com:aztlan69",
-                "joey.bunn@yahoo.com:toyota",
-                "alex831@yahoo.com:alex",
-                "the_revl954@yahoo.com:xxxxxx",
-                "complicateddy@yahoo.com:diana123",
-                "ersunakay@yahoo.com:5303690",
-                "kelseylynn1025@yahoo.com:hood16",
-                "thebighardsun@yahoo.com:213960",
-                "srt4navy@yahoo.com:srt4navy",
-                "certified_cutie_04@yahoo.com:ripdoc",
-                "Christina_harris80@yahoo.com:tristan1",
-                "wrr13@yahoo.com:dunken13",
-                "tmb52377@yahoo.com:danceschool",
-                "delmyvasquez34@yahoo.com:tiger123",
-                "susanned5450@yahoo.com:sd1319",
-                "viviandriopoulou@yahoo.com:2211",
-                "ekojck@yahoo.com:238190",
-                "lauroreis@yahoo.com.br:quicken",
-                "trapps11@yahoo.com:rocco",
-                "joshakerson28@yahoo.com:wrestling",
-                "ryan.guay@yahoo.com:reg341128",
-                "medi_sin_man@yahoo.com:brennan",
-                "jayphil44@yahoo.com:silverio4",
-                "torresh21@yahoo.com:sama1206",
-                "PinkeSwear@yahoo.com:Savannah1",
-                "syafique_mw@yahoo.com.my:110888",
-                "bgoodson18@yahoo.com:nsyncfan",
-                "ceeross7@yahoo.com:tbangers1",
-                "chriscmallard@yahoo.com:ichthus",
-                "rpatten@yahoo.com:onefour55",
-                "tricia_1288@yahoo.com:softball",
-                "djses76@yahoo.com:getmoney1",
-                "anavipereira@yahoo.com.br:230296",
-                "mchal_ls@yahoo.com:jesus1",
-                "roch_chelle_29@yahoo.com:ellechor",
-                "allexis.goodwin@yahoo.com:babygurl14",
-                "allexis.goodwin@yahoo.com:babygurl14",
-                "l.devoliere@yahoo.com:panthers",
-                "warchol6@yahoo.com:joyof4boys",
-                "s_kairn@yahoo.com:chaz1997",
-                "afy_xa@yahoo.com:hafiza",
-                "iamphil2008@yahoo.com:2790w00t",
-                "iamphil2008@yahoo.com:2790w00t",
-                "ireyesnmf@yahoo.com:nyasia418",
-                "Remy85601@yahoo.com:0879Pierre",
-                "gemini234@yahoo.com:gemini234",
-                "tlanouette@yahoo.com:lee123",
-                "c_hannula24@yahoo.com:jondas8i",
-                "angelique_lewis59@yahoo.com:disneyp2",
-                "ccmghana@yahoo.com:wanderer",
-                "bv_minero@yahoo.com:bernard",
-                "gregscorza@yahoo.com:greg07",
-                "ack18@yahoo.com:goalie69",
-                "ayanah228@yahoo.com:missdiva",
-                "gtr1328@yahoo.com.tw:06281328",
-                "bryaniseffect@yahoo.com:andrew",
-                "martitacervantes1978@yahoo.com:regis1978",
-                "iheartcheer320@yahoo.com:dixie320",
-                "cj.nwuju@yahoo.com:gold6325",
-                "czarina_diwa@yahoo.com:czarmaine",
-                "ref_3105@yahoo.com:jjf111",
-                "nntharp@yahoo.com:marino",
-                "noaction08@yahoo.com:aksi08",
-                "chea3313@yahoo.com:101879",
-                "TrevinnoS@yahoo.com:onelove919",
-                "alissa_reidy@yahoo.com:poppy1111",
-                "mammasanford@yahoo.com:mizzer",
-                "axmal11@yahoo.com:pesona77",
-                "paulineappel@yahoo.com:121200",
-                "blueying118@yahoo.com.hk:yingying",
-                "domskie_1382@yahoo.com:011382",
-                "techno_is_life@yahoo.com:2093045",
-                "korykid_1@yahoo.com:love99",
-                "knudko@yahoo.com:2911pm",
-                "franksmith12344@yahoo.com:leeona1",
-                "im_@yahoo.com:123456",
-                "srseminole@yahoo.com:snickers2",
-                "fatimastepps@yahoo.com:missme2",
-                "smartgirl_ph@yahoo.com:apollo13",
-                "cross2426@yahoo.com:xenna24",
-                "x0brit0x22@yahoo.com:t00thbrush",
-                "upchuck_21@yahoo.com:andyb123",
-                "mcdomeng16@yahoo.com:mcdomeng16",
-                "chris_englin@yahoo.com:odelay",
-                "awwabl@yahoo.com:lbawwa",
-                "luna.ana88@yahoo.com:202122",
-                "kellog624@yahoo.com:happiness",
-                "baileykim03@yahoo.com:elizabeth",
-                "dougiefisher13@yahoo.com:yellowfin",
-                "rts_franchise@yahoo.com:franchise",
-                "nmnjordan@yahoo.com:love5083",
-                "fabiorich@yahoo.com:ikthus",
-                "boobi20@yahoo.com:genesis",
-                "caitlinmk0108@yahoo.com:cmkb1898",
-                "gracielalopez434@yahoo.com:sergrana2",
-                "hboykin9515@yahoo.com:bonkers12",
-                "didits_gonzales@yahoo.com:whitey",
-                "zuraysf@yahoo.com.sg:inaida",
-                "angelaquino@yahoo.com:angel",
-                "eichman84@yahoo.com:chris7",
-                "erika0506ramirez@yahoo.com:erika0506",
-                "ajf4l2006@yahoo.com:km99cq",
-                "nishaishere06@yahoo.com:lilsexy06",
-                "josh.mccracken@yahoo.com:shanna05",
-                "qrxv@yahoo.com:291279",
-                "jonas_lvr247@yahoo.com:nickjonas1",
-                "fireheart421@yahoo.com:superbowl39",
-                "markteshenbaugh@yahoo.com:kikirara5",
-                "chuckle_boo@yahoo.com:marshal4",
-                "jmelowjones@yahoo.com:melow123",
-                "herien07@yahoo.com:rinsie07",
-                "cournykaunbaun@yahoo.com:bubbles11",
-                "dennykutil@yahoo.com:lupalagi",
-                "danspen13@yahoo.com:l4pt0p1",
-                "jesschaser@yahoo.com:redken",
-                "jsfilth13@yahoo.com:monster13",
-                "chromatocrat@yahoo.com:sup512pr",
-                "stephn_27@yahoo.com:korzkie",
-                "trobinson1234@yahoo.com:dickhead1",
-                "markhiner@yahoo.com:bigh72",
-                "krova666@yahoo.com:2prhc7j",
-                "eodell89@yahoo.com:pink11",
-                "bigboreracing@yahoo.com:andy3300",
-                "parmerholiday@yahoo.com:mrbean07",
-                "izan_ainizan@yahoo.com:nike1959",
-                "lenlen_gaisano@yahoo.com:len7888",
-                "kymcurtis@yahoo.com:December07",
-                "ray_5p1k3@yahoo.com:newraymond",
-                "cfpolito@yahoo.com.br:110377",
-                "ali_olcer@yahoo.com:zanaka",
-                "nvoda@yahoo.com:fanta45",
-                "r.provencial@yahoo.com:badco1956",
-                "xkiniaczekxpl@yahoo.com:pamagda",
-                "jess06_lyons@yahoo.com:jerkface",
-                "dghiggy@yahoo.com:dghiggy",
-                "theyankees1923@yahoo.com:mooch3",
-                "deception1441@yahoo.com:dragon110",
-                "cindy_shuyu@yahoo.com:aaron4life",
-                "method320@yahoo.com:6244907",
-                "tonytapney@yahoo.com:shebacali1",
-                "my_din27@yahoo.com:774400",
-                "ian_apolonio@yahoo.com.ph:tarantula",
-                "kerwincruz@yahoo.com:111837",
-                "beachstop@yahoo.com:sissie42",
-                "kikenzi06@yahoo.com:kiarrah",
-                "slickmiller28@yahoo.com:droopy",
-                "struppjon@yahoo.com:packers",
-                "bellaly11@yahoo.com:roxie123",
-                "kimwunder@yahoo.com:jesusis",
-                "marquishawkins1989@yahoo.com:lamer228",
-                "gomezkev@yahoo.com:dangerous",
-                "anese26@yahoo.com:grambling",
-                "saenzazul@yahoo.com:130777",
-                "ryda2008@yahoo.com:ilive408",
-                "lauralyn06@yahoo.com.au:magic803",
-                "delia_marie1@yahoo.com:delbel1",
-                "kayode94@yahoo.com:Bolaji12",
-                "aunler@yahoo.com:205205",
-                "clevesown1@yahoo.com:washer28",
-                "kd0770@yahoo.com:kyle2824",
-                "cwadams03@yahoo.com:cwadams03",
-                "kjoyce612@yahoo.com:joy612",
-                "stateparkmomma@yahoo.com:061454",
-                "jimmie81@yahoo.com:cammie07",
-                "kwilliamsyes@yahoo.com:popo2580",
-                "cartoony96@yahoo.com:skittles2",
-                "codyodie23@yahoo.com:chicago",
-                "doomdoomdoomdoomgir@yahoo.com:shitcunt28",
-                "spdie7@yahoo.com:spdie7",
-                "minghosie@yahoo.com:791207",
-                "kianat417@yahoo.com:041795",
-                "kurtdog_us@yahoo.com:einstein",
-                "vash1407@yahoo.com:trigun",
-                "Negm.Nemo@yahoo.com:ttttttttt",
-                "tetesell@yahoo.com.br:ljo265",
-                "jasminesgivens91@yahoo.com:diggy21",
-                "tholt0414@yahoo.com:sophie0414",
-                "lizodus@yahoo.com:jaybaby",
-                "casaggi@yahoo.com.br:mar211",
-                "macaulaynaomi@yahoo.com:1151997",
-                "jho_angelz@yahoo.com:supergirl",
-                "marius.girulis@yahoo.com:liutas08",
-                "ft460@yahoo.com:mustang",
-                "alishaezell@yahoo.com:mikayla123",
-                "kbboys05@yahoo.com:hunting05",
-                "smitty3435@yahoo.com:bandit",
-                "sandi_kakugawa@yahoo.com:kaku5258",
-                "ethan_ballinger08@yahoo.com:30pass",
-                "nuche3135@yahoo.com:zen3135",
-                "jeffersondeguzman28@yahoo.com:jeff28",
-                "greg_0668@yahoo.com:ally0906",
-                "fivetoasters@yahoo.com:bdt1bdt2",
-                "babyjeansenya2006@yahoo.com:yasmin03",
-                "seickost24@yahoo.com:russel24",
-                "gloryminded@yahoo.com:kelly777",
-                "jssmc@yahoo.com:1973nova",
-                "wellschelsea32@yahoo.com:bowwow1",
-                "kkpatel111@yahoo.com:ritu41280",
-                "paymanfaraji@yahoo.com:poster",
-                "spoester@yahoo.com.br:231736",
-                "chrisesimpson@yahoo.com:200503",
-                "lyonsmane2000@yahoo.com:amosandandy",
-                "f18garcia@yahoo.com:teddy618",
-                "e.nesimi00@yahoo.com:ed1976",
-                "half_demonPG13@yahoo.com:iloveyou",
-                "Design2182@yahoo.com:yellow123",
-                "shepherd14344@yahoo.com:14344678",
-                "hollywod28@yahoo.com:lakes73",
-                "nemo_093@yahoo.com:1243397",
-                "udshalk@yahoo.com.br:097680",
-                "dewayne_richardson_michael@yahoo.com:dewayne12",
-                "adrih_qt@yahoo.com:sandy2006",
-                "doctor_hammood@yahoo.com:egyptian",
-                "mcartwright28@yahoo.com:love11",
-                "luis_tabornal2005@yahoo.com:12457800",
-                "topakin@yahoo.com:topakin",
-                "ezzy89_gemini@yahoo.com:yellow",
-                "rcd1708@yahoo.com:hockey01",
-                "elcocouy@yahoo.com:MImila08",
-                "lissette44@yahoo.com:monster4",
-                "shelliethomas77@yahoo.com:shel1205",
-                "danamariex2@yahoo.com:august",
-                "laurenchojnacki@Yahoo.com:fuckers1",
-                "lrolivier@yahoo.com:tequila",
-                "nomad194@yahoo.com:Nomad200",
-                "kndr_tucker@yahoo.com:shatara",
-                "jbiggs_apc@yahoo.com:x5687798",
-                "bigsmooth_74@yahoo.com:justdoit1",
-                "drdrkwan@yahoo.com.hk:gdale386",
-                "tsmith2589@yahoo.com:saints08",
-                "lowbrassguy1@yahoo.com:tyler12",
-                "nicolespencer35@yahoo.com:janalee1",
-                "aprilsimone36@yahoo.com:baruch",
-                "milner142790@yahoo.com:mitchell16",
-                "tgavin107@yahoo.com:dkitten22",
-                "brambg@yahoo.com:bombers",
-                "sgsmbo@yahoo.com:12345678",
-                "tagle_k@yahoo.com:august",
-                "zacktheman9@yahoo.com:wrestle1",
-                "rico5_2000@yahoo.com:sosexy26",
-                "jillian.perini@yahoo.com:jillpill2",
-                "Teshawnfoster@yahoo.com:rico66",
-                "mcewenc16@yahoo.com:cm1990",
-                "mstern82@yahoo.com:1995f350",
-                "lentellj@yahoo.com:1xracing",
-                "gorda.1104@yahoo.com:12140401",
-                "govs77@yahoo.com:vin3677",
-                "cyrel1186@yahoo.com:nov1786",
-                "amycleveland12@yahoo.com:01302005",
-                "jentaylor_77@yahoo.com:jtaylor81",
-                "allmorris@yahoo.com:jasmine7",
-                "lopeztriston@yahoo.com:t441205l",
-                "wsucribguy@yahoo.com:crib7944",
-                "crazy_chick_4lyfe@yahoo.com:nookie1",
-                "caseylw10@yahoo.com:chucky10",
-                "corgi_la@yahoo.com:Donkey1",
-                "mohsen_rms@yahoo.com:mufc2000",
-                "tayhard@yahoo.com:villard55",
-                "wewdohgy1@yahoo.com:2356777",
-                "rawbury@yahoo.com:ray308128",
-                "ram_ramskiez@yahoo.com:junereimar",
-                "peterfsho@yahoo.com:powerr",
-                "datommy@yahoo.com:freddief",
-                "crisjcoen@yahoo.com:crissy",
-                "jonte1293@yahoo.com:december",
-                "rafraanje@yahoo.com:roalfr",
-                "Giz2022@yahoo.com:202202",
-                "kairos41705@yahoo.com:marmar",
-                "luisdus@yahoo.com.mx:procatt",
-                "shavonbouey@yahoo.com:jiselle08",
-                "saurav_kakar@yahoo.com:mackintosh",
-                "wkcw888@yahoo.com.hk:A821328B",
-                "nightryder304@yahoo.com:e6970488",
-                "supermarc_31@yahoo.com:thirtyone",
-                "ookla13@yahoo.com:aug142004",
-                "mogilnickikevin@yahoo.com:deadman1",
-                "steph.r3711@yahoo.com:b16101",
-                "Msvirgo969@yahoo.com:4ubabe",
-                "prathejm@yahoo.com:socrates",
-                "jlgomez90@yahoo.com:Sebastian1",
-                "sarah.north@yahoo.com.au:Cooper88",
-                "cheska@yahoo.com:cheska",
-                "aubreagalloway@yahoo.com:october17",
-                "billy_spell@yahoo.com:jump4joy",
-                "lilian_b_samson@yahoo.com:charmell",
-                "kai4w@yahoo.com:1816kc",
-            ]
-                await client.send_message(message.author, (random.choice(variable)))
-            else:
-                await client.wait_for_message(timeout=10)
-                await client.delete_message(message)
-                await client.send_message(message.author, "use the #❗»-generator channel")
-        else:
-            await client.send_message(message.channel, "Subscribe `yCode` and send Moderator or a Admin a Screen!")
+@client.command()
+@commands.has_permissions(send_messages=True)
+async def spotify(ctx, member: discord.Member = None):
+    if not member:
+        await ctx.send("Please type you name! -spotify @name")
+        return
+    channel = discord.utils.get(member.guild.channels, name="generator-log")
+    emb = (discord.Embed(description="Account Generator", color=0x2DF270))
+    emb.add_field(name=f"A user created a Spotify account", value=member.display_name, inline=False)
+    emb.add_field(name=f"and the id is {member.mention}", value="check it", inline=False)
+    await channel.send(embed=emb)
+    await ctx.send("I send a Account to your DMs, please wait a bit. (I do allown the accs so i cant  refill it all weekends)")
+    await asyncio.sleep(3)
+    choices = [
+        "dmcghee1@hotmail.com:Cunn1ngham",
+        "maira_giggles@hotmail.com:homerito12",
+        "kyanoffutt@gmail.com:CCommerce1",
+        "elikay111@yahoo.com:qwertyuiop",
+        "itsamandalindsey@yahoo.com:Tobasco8 | US",
+        "apatino52@gmail.com:denise88 | US",
+        "briannemccauliffe@gmail.com:yerface1 | US",
+        "sekyeredelores@yahoo.com:sincity1 | US",
+        "mollyrothaus@gmail.com:shinshin | US",
+        "proudmommy1748@gmail.com:Alessa07 | US",
+        "thewimberleyfam@gmail.com:Landon03 | US",
+        "kybrighteyes@gmail.com:jlm72986 | US",
+        "sm_moreno_@hotmail.com:goblue11 | US",
+        "angulo306@hotmail.com:18beto06 | US",
+        "defiprophetic@gmail.com:122459122459 | US",
+        "oax4y@hotmail.com:tonito04 | US",
+        "callieburris@gmail.com:mariah29 | US",
+        "teeplesst@gmail.com:batgirl8886 | US",
+        "ramirez15alexandra@gmail.com:zoeybear | US",
+        "rachelwaraksa@gmail.com:beatles88 | US",
+        "puckett.madeline@gmail.com:puckett3 | US",
+        "zachnorris7@yahoo.com:sophie117 | US",
+        "pranny.1012@gmail.com:batista123 | US",
+        "sailorsonic02@gmail.com:flatwalk81 | US",
+        "michellekorp@gmail.com:Sweets22 | US",
+        "potenza448@gmail.com:Turkeybird1 | US",
+        "cduell144@roadrunner.com:spencer144 | US",
+        "homesbyeagle@aol.com:Eagle1997 | US",
+        "rhonda_ludbrook@yahoo.com:Utarlg01 | US",
+        "thecoffeeMailbox@gmail.com:Mongoose12 | US",
+        "Tjcalmon@gmail.com:eagles11 | US",
+        "stewart85@gmail.com:Paddock4034 | US",
+        "acsjcs@hotmail.com:jcsacg00 | US",
+        "mrg8585@yahoo.com:feisty2007 | US",
+        "zcesg@yahoo.com:zephyr | US",
+        "manifest61@yahoo.com:1018obama | US",
+        "manchild606184@yahoo.com:05nikki85 | US",
+        "opatlamo@gmail.com:phucyoua | US",
+        "polega@chapman.com:rocky247 | US",
+        "chris_duncil@yahoo.com:aquarium | US",
+        "cd_crystal@yahoo.com:harvest1 | US",
+        "nickrangnekar@gmail.com:niditi7870 | US",
+        "jenibackhaus@gmail.com:isaac247 | US",
+        "andrewskolette@gmail.com:bearlake8 | US",
+        "kaydeee23@aol.com:mytaylre25 | US",
+        "gregorymoran@mac.com:rqhf8a | US",
+        "javiervila1171@gmail.com:Dragons17 | US",
+        "dewster420bagel@yahoo.com:beatit963 | US",
+        "insideoutfitter@yahoo.com:rush2112 | US",
+        "gera.saenz@live.com:chabela | US",
+        "nancy.o.ewing@gmail.com:sputnik | US",
+        "matthewneuhaus17@gmail.com:Green!5653 | US",
+        "soccerlucas1@gmail.com:weis0171 | US",
+        "granpa0405@gmail.com:tashagirl | US",
+        "iivomac@gmail.com:Little13 | US",
+        "coleshortall28@gmail.com:Green104 | US",
+        "vannibunni@rocketmail.com:svanig14 | US",
+        "holaruthann@gmail.com:polly7anna | US",
+        "mnstrduc@yahoo.com:ducati996 | US",
+        "tymogar@gmail.com:imreallybored1 | US",
+        "emily_steffensen@hotmail.com:bluegreenpoco | US",
+        "david.owens.012@gmail.com:Cobras12 | US",
+        "john231lee@aim.com:Lasko123 | US",
+        "kylelambeth101@gmail.com:Rockband2 | US",
+        "Jacob_houzenga@yahoo.com:Turtle123123 | US",
+        "laudi2016@hotmail.com:rogue2000 | US",
+        "sebastian.waterman@gmail.com:Swatter27 | US",
+        "pumpkinking51@gmail.com:pizza2002 | US",
+        "zanemoseley@hotmail.com:511361 | US",
+        "bjscullion@gmail.com:yearight | US",
+        "gauth113@yahoo.com:mt101198 | US",
+        "JSpadesM@aim.com:ars123 | US",
+        "loganelectro@gmail.com:halofan1 | US",
+        "taycurrie@gmail.com:ptlightnning | US",
+        "notserp007@gmail.com:52j=VUhu | US",
+        "jnorton5491@gmail.com:hoover98 | US",
+        "cjax531@prodigy.net:100Bottles | US",
+        "thenneghan@gmail.com:diewulu74 | US",
+        "sacha@bluebirdboutique.com:banana | US",
+        "trishalyn_76@yahoo.com:chadwick23 | US",
+        "adjustis@yahoo.com:maple1 | US",
+        "jeannebeanie_57@hotmail.com:jmwsneak1 | US",
+        "alisonkwoods@gmail.com:eirgil | US",
+        "dandamico6454@msn.com:puggerman | US",
+        "twintime@yahoo.com:twin1957 | US",
+        "williamburell@gmail.com:Jeep9099 | US",
+        "dwolfz720@gmail.com:wolf7star | US",
+        "sarah.chambliss@gmail.com:lamat3774 | US",
+        "aldavis72@comcast.net:Chevy_2001 | US",
+        "lunsfordmichael@comcast.net:shenand0 | US",
+        "daytripper62@comcast.net:bb031427 | US",
+        "jmblokdijk@gmail.com:A10lakers | US",
+        "cdenton041793@gmail.com:leapyear1 | US",
+        "projectelitestebbins@yahoo.com:gunner13 | US",
+        "independentman19@aim.com:monster1 | US",
+        "mckenziestahmer@gmail.com:ms961501 | US",
+        "jonasall@msn.com:Earthsea1 | US",
+        "m.shemeley@verizon.net:ironshem1 | US",
+        "blakecolquitt@gmail.com:12343214 | US",
+        "rjwatts45@gmail.com:gixxer05 | US",
+        "morganmccray31@yahoo.com:gorillajoe88 | US",
+        "Singerar1@att.net:042498pt | US",
+        "stephaniejudd@me.com:11pass11 | US",
+        "stephenk81@yahoo.com:ashton05 | US",
+        "steve.ooo@mac.com:trbrocks1 | US",
+        "justinpease822@gmail.com:v240z18a1 | US",
+        "brianaspangler44@gmail.com:44porkypines | US",
+        "hayatcamellia@yahoo.com:skank1294 | US",
+        "wilfredo20200@yahoo.com:Janet318 | US",
+        "crystal.lauran@gmail.com:M1cha3lsux | US",
+        "wrigleybear1@gmail.com:12346107j | US",
+        "jonathan_ackley91@yahoo.com:j199110231 | US",
+        "blast3r321@hotmail.com:a00510457 | US",
+        "vness29@yahoo.com:diego611 | US",
+        "workwoman@hotmail.com:jojo7788 | US",
+        "averydarcher725@yahoo.com:avery2000 | US",
+        "nikatkins@gmail.com:nearma81 | US",
+        "kmuzamali11@yahoo.com:Hasek139 | US",
+        "keaunawalt@aol.com:Dutchess123 | US",
+        "mentzer.20@osu.edu:noodles | US",
+        "kelseyunland@gmail.com:horses123 | US",
+        "suzywickham@yahoo.com:Bubbles1 | US",
+        "yang.931@gmail.com:ianhan0106 | US",
+        "info@cassandcompanysalon.com:cass2001 | US",
+        "sportystuff16@gmail.com:Ksmyace16 | US",
+        "lynneann1@hotmail.com:5996011 | US",
+        "gilkeylaquann@gmail.com:gilkey12 | US",
+        "justindoty97@hotmail.com:Greenmachine101 | US",
+        "scmipa@gmail.com:Amberwan1 | US",
+        "ppajkos_85@hotmail.com:sticks2b | US",
+        "shafner1@yahoo.com:4freedom | US",
+        "kimm199@yahoo.com:waterr | US",
+        "MYFIDDY6@aol.com:SNOOPY1 | US",
+        "marclouw@gmail.com:m101sail | US",
+        "annakcampbell@aol.com:Ob1kenobi | US",
+        "alfonsotapia18@yahoo.com:toofast12 | US",
+        "ba.parnian10@gmail.com:Pari1234 | US",
+        "bambamups@yahoo.com:chapell1965 | US",
+        "stewy12006@yahoo.com:Racecar1 | US",
+        "bratmana85@yahoo.com:Dannylover85 | US",
+        "cassidy_little@yahoo.com:Jesus911 | US",
+        "j.shehorn@gmail.com:falcon16 | US",
+        "Joe00144@gmail.com:Jojo0918 | US",
+        "jrgenz1102@yahoo.com:baseball31 | US",
+        "kacie.snellings@gmail.com:Tarheels1 | US",
+        "kckay21@gmail.com:Kowboyk1 | US",
+        "devsaj@hotmail.com:sdevitt1 | US",
+        "kpmorris07@yahoo.com:Glasg0w1972 | US",
+        "l_bastress@yahoo.com:hawaii94 | US",
+        "laurie@lacreativeonline.com:shawnbacker19 | US",
+        "matso01@live.com:saints25 | US",
+        "mebrunner0591@gmail.com:Rolltide1991 | US",
+        "melissablain47@yahoo.com:Trey1219 | US",
+        "merrittbuck@gmail.com:130Ngevertdr | US",
+        "sarahrpannell@yahoo.com:srp8764mtp | US",
+        "Snoslash88@gmail.com:woodis11 | US",
+        "krickens21@hotmail.com:rocker17 | US",
+        "milind_gokhale@yahoo.com:madjayraj | US",
+        "patti.cole@gmail.com:lifeisgr8 | US",
+        "posterworksgallery@gmail.com:pepper1 | US",
+        "aerosmith722@yahoo.com:susieq01 | US",
+        "ericadiles@yahoo.com:jeeeed25 | US",
+        "phil@philbransom.com:uofo1980 | US",
+        "tothgjoshua@gmail.com:Cosmic0384 | US",
+        "dregenius98@gmail.com:ford1000 | US",
+        "djnorap@gmail.com:adrlyda12 | US",
+        "maanhilal@gmail.com:tri601521 | US",
+        "happywithlife@gmail.com:Freedom100 | US",
+        "barrybrooksoneill@gmail.com:Dollarbills | US",
+        "johnoo70@hotmail.com:a3zeva123 | US",
+        "j.jess2001@yahoo.com:Poptart1234 | US",
+        "brian.newman84@gmail.com:mejo2102 | US",
+        "kellb73@yahoo.com:jager123 | US",
+        "darkcriii@yahoo.com:joey2636 | US",
+        "Coleriggs13@yahoo.com:marie1 | US",
+        "nshenkle@yahoo.com:maggylucy | US",
+        "leahfremouw@yahoo.com:marley1fr | US",
+        "sniclong@yahoo.com:samavamandy | US",
+        "karen_keeter@yahoo.com:karen1963 | US",
+        "charisma.edmisten@yahoo.com:Baton321 | US",
+        "ninjamanex23@gmail.com:pikachu23 | US",
+        "n.lascelles@yahoo.com:river1 | US",
+        "heavenstar83@yahoo.com:elijahmichael | US",
+        "eraserhead2287@yahoo.com:RATMx523 | US",
+        "rachhany@yahoo.com:fresno | US",
+        "southernbelle777@hotmail.com:philojl77 | US",
+        "prettypaintg@yahoo.com:eagles36 | US",
+        "carmendes2001@yahoo.com:games4us | US",
+        "thekosals@yahoo.com:jack1234 | US",
+        "brennen.w.brown@gmail.com:Panthers15 | US",
+        "mitchell.conrad@gmail.com:Mitchmom10 | US",
+        "ayad.richard@gmail.com:Likeawhore7 | US",
+        "zibbus26@msn.com:quinn3561 | US",
+        "steve@ibizsystems.net:hello123 | US",
+        "sm103@att.net:melvin | US",
+        "waitfortheword@gmail.com:juice1980 | US",
+        "ctholden93@gmail.com:relaxed1 | US",
+        "amata029@gmail.com:Blowme12 | US",
+        "ambrose20000@gmail.com:richard11 | US",
+        "katnipgangsta@gmail.com:bruins13 | US",
+        "rachel.dickinson154@gmail.com:soonok32 | US",
+        "joseph.ruiz@cox.net:Tigger77 | US",
+        "alan.zhu.yu@gmail.com:alan72mike | US",
+        "alistewart@gmail.com:6thSister | US",
+        "swhit94@gmail.com:Skyhigh123 | US",
+        "moser.grant@gmail.com:3l3phant | US",
+        "bartondvm@gmail.com:Blue1pic | US",
+        "brendafowler@comcast.net:january18 | US",
+        "brianheisler@comcast.net:luke0511 | US",
+        "cander49@utk.edu:titan529 | US",
+        "breeagainstcity@yahoo.com:alltimel0w | US",
+        "yohance518@gmail.com:yohance1 | US",
+        "colbert.xandria7@gmail.com:Mtutt112 | US",
+        "m_dahne@yahoo.com:pinnacle | US",
+        "ejoliva@comcast.net:Plugpark91 | US",
+        "norcalracer88@msn.com:Enochs88 | US",
+        "boone.nichols@gmail.com:Colton1234 | US",
+        "ryansmithers@cox.net:Pali2012 | US",
+        "ter0814@yahoo.com:skulls13 | US",
+        "rodriguez.adrian81@yahoo.com:1251628a | US",
+        "susangiaco@gmail.com:buzzy1 | US",
+        "lisamosquera4@yahoo.com:mom061065 | US",
+        "swain.kim.d@gmail.com:jomamma | US",
+        "salj2876@yahoo.com:2876dora | US",
+        "deborah@bjorkly.com:Figaro2012 | US",
+        "grob556@gmail.com:Th$6uhHum | US",
+        "irenemark@comcast.net:andrew99 | US",
+        "tenishadandridge@yahoo.com:bd24955460 | US",
+        "thavle1@gmail.com:thuydung12 | US",
+        "mdgibson80@gmail.com:liberty1 | US",
+        "reymundo.lozano@mssm.edu:Oxfocars072 | US",
+        "rpepsin1@gmail.com:usbank01 | US",
+        "swannlong@aol.com:swanner4 | US",
+        "daveroggen@yahoo.com:hashomer | US",
+        "parksa@net.elmhurst.edu:sodapop1 | US",
+        "robertz1894@gmail.com:bubbaboy62 | US",
+        "Greg.Mansell@Ohio-EmploymentLawyer.com:gm281826 | US",
+        "bjmealer@hotmail.com:bj0729bj | US",
+        "joy.cameron@gmail.com:joanie66 | US",
+        "wifi13@Comcast.net:Brandy1358 | US",
+        "karenlbailey@sbcglobal.net:kitterpuss | US",
+        "kasey@oleary.net:drinzy | US",
+        "stazzles@gmail.com:mememe123 | US",
+        "atntpc@yahoo.com:Giantescape2 | US",
+        "caesar.rangel@yahoo.com:love4boys | US",
+        "emilyjeanette@gmail.com:midget44 | US",
+        "kaycho1101@yahoo.com:Kailene1101 | US",
+        "luisnunez318@gmail.com:Cortana117 | US",
+        "toddpeixinho13@gmail.com:Abcdefg8 | US",
+        "bigtbone17@gmail.com:packers4 | US",
+        "seased78@gmail.com:Skyrim78 | US",
+        "lilspykdogg3@gmail.com:eevee123 | US",
+        "theaob@aol.com:protoman1994 | US",
+        "lord_kiddian@yahoo.com:p3numbra | US",
+        "lanirose30@gmail.com:34hondas | US",
+        "kayleewheeler33@gmail.com:jakeroo | US",
+        "cchampernowne@gmail.com:Ravenclaw1 | US",
+        "tobeexzack@gmail.com:Midnight11 | US",
+        "daebrieon@yahoo.com:Drillers35 | US",
+        "harunbegic@yahoo.com:Rajvosa1971 | US",
+        "mrbossandrew@gmail.com:Likeaboss1 | US",
+        "mcgrathz@yahoo.com:newjersey | US",
+        "alecsmurf9@gmail.com:alec1117 | US",
+        "diarmot@aol.com:carlow40 | US",
+        "nmwr@mac.com:august21 | US",
+        "amyryupark@yahoo.com:mimi3momo | US",
+        "Ef_sala@aol.com:fabian75 | US",
+        "eggritx@msn.com:Happy2day | US",
+        "john.wilson@sekologistics.com:jwilly77 | US",
+        "nancycenter@me.com:Deovalenti77 | US",
+        "Donaldrhaas@gmail.com:college34 | US",
+        "wickedjoker806@yahoo.com:adidas666 | US",
+        "laurakirchner@hotmail.com:Tatumk22 | US",
+        "manofwargh@gmail.com:701669 | US",
+        "bill2934@gmail.com:thirtytwo32 | US",
+        "asam06@gmail.com:oranges1 | US",
+        "dbressler569@aol.com:Butthead569 | US",
+        "mashmallow346@gmail.com:popcorn56 | US",
+        "davidweidberg@gmail.com:cowboys1175 | US",
+        "corywallace90@gmail.com:Wallace45 | US",
+        "dlesesne23@gmail.com:akdale16 | US",
+        "colorizedd@gmail.com:1life1love | US",
+        "pkennedy787@gmail.com:ilikepie11 | US",
+        "penguinsw022@gmail.com:fanon022 | US",
+        "sethnajay@gmail.com:W!ndmil1 | US",
+        "jospre001@yahoo.com:ignite123 | US",
+        "teishaearl@yahoo.com:March1994 | US",
+        "samhoward05@gmail.com:soccer3 | US",
+        "tjaffurs@gmail.com:TJpilot01 | US",
+        "jtstrapp79@yahoo.com:casavian | US",
+        "conemusic@yahoo.com:woodbed513 | US",
+        "oneswtworld@gmail.com:pearljam | US",
+        "ldrapermusic@gmail.com:hermano1 | US",
+        "sbrown1186@hotmail.com:local420 | US",
+        "vlang45@hotmail.com:mustang9 | US",
+        "kabarham2011irc@gmail.com:chowflea309 | US",
+        "rodmachbr@hotmail.com:adsumus010378 | US",
+        "evelyncarreon56@gmail.com:Bobby022 | US",
+        "jschmidt85@gmail.com:Spike2k187 | US",
+        "marcus513@hotmail.com:money1977 | US",
+        "seeslam426@gmail.com:5335743 | US",
+        "ktlouiselerer@gmail.com:mrsscoot | US",
+        "skostinsky@gmail.com:2pimlico | US",
+        "briangierman@gmail.com:bg607153 | US",
+        "navygirl9801@yahoo.com:annabel1 | US",
+        "jeffrey.mance@gmail.com:JmFu4861 | US",
+        "geralddwright@gmail.com:33Knicks | US",
+        "rgoldsteincpa@yahoo.com:Mgeg38ag | US",
+        "sherry.fardie@yahoo.com:orion6451 | US",
+        "ranyahutchens@yahoo.com:gabriel1 | US",
+        "jayfra35@gmail.com:erinma | US",
+        "prado.jillian@gmail.com:mookie85 | US",
+        "rsbaier@gmail.com:booby2 | US",
+        "Wjanetdougherty@gmail.com:wonee0504 | US",
+        "aswinkumar.saravanan@gmail.com:banana | US",
+        "trochan@gmail.com:Pataluma007 | US",
+        "dimitri.vermes@gmail.com:chepo98p | US",
+        "mjfarley@gmail.com:farside73 | US",
+        "courtneeulrich@gmail.com:hippos | US",
+        "sandjkemp4585@gmail.com:badist202 | US",
+        "benkocm@gmail.com:kokobe01 | US",
+        "matt.isenbarger@gmail.com:Mattiso1 | US",
+        "csnyder7@gmail.com:C2010Ssb | US",
+        "cerullot@gmail.com:Baseball84 | US",
+        "sdhomeguru@yahoo.com:ewcaky5151 | US",
+        "jimsbagger@yahoo.com:jimbo58 | US",
+        "mallorycaldwell@gmail.com:lilangel82 | US",
+        "tiffpat@aol.com:6723401g | US",
+        "h_rogers@yahoo.com:SupremeJ1 | US",
+        "martin.perez456@yahoo.com:88569456 | US",
+        "eliastavarez22@gmail.com:penguins11 | US",
+        "imsopretty2001:Maddy2001 | US",
+        "Fleuryaaron19@gmail.com:Cortland19 | US",
+        "jacquelinemary1989@gmail.com:clock1234 | US",
+        "dakotadeist@gmail.com:dakota96 | US",
+        "m.andrews9739@gmail.com:love0812 | US",
+        "Mr.nictionary@gmail.com:monkey911 | US",
+        "alexroman2011@yahoo.com:bologna8 | US",
+        "wmichaelshannon@aol.com:imagine0 | US",
+        "elliejones248@gmail.com:Music248 | US",
+        "emmamicic@yahoo.com:wgwittbmg | US",
+        "erinmcglynn100@yahoo.com:pacokona | US",
+        "Gregory.savanah@gmail.com:Savanah22 | US",
+        "hadeel724@outlook.com:reem24 | US",
+        "hmsmary8708@gmail.com:0610hms8708 | US",
+        "jadaadger@yahoo.com:love7262 | US",
+        "jasmine.rab4@gmail.com:Elmo1320 | US",
+        "jazellerzz7913@gmail.com:MUAj7913 | US",
+        "JGarvin143@gmail.com:Lynxlover143 | US",
+        "jmskg5@live.com:soccer745 | US",
+        "joannamorris99@gmail.com:jojobean08 | US",
+        "joannakamara@ymail.com:smartjojo123 | US",
+        "joehanna.allen@gmail.com:w0lfgang | US",
+        "kacie_4_11_14@yahoo.com:kacielynn | US",
+        "shelby0731@gmail.com:Samkoda1 | US",
+        "morgmillers@yahoo.com:Brat92mm | US",
+        "memeric555@gmail.com:Nur$e2019 | US",
+        "sierra.gladsee.sg@gmail.com:Sg100796 | US",
+        "sayraflores238@gmail.com:sayra_oxo | US",
+        "mctn21@yahoo.com:austin1990 | US",
+        "prathmika.jha@gmail.com:Mika123jha | US",
+    ]
+    rancoin = random.choice(choices)
+    await ctx.author.send(rancoin)
+    role = discord.utils.get(ctx.guild.roles, name="muted")
+    await member.add_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker Lite")
+    await member.remove_roles(role)
+    await asyncio.sleep(3600)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.add_roles(role)
 
-    if message.content == "-help":
-        emb = (discord.Embed(description="**COMMANDS**", color=0x3DF270))
-        emb.add_field(name="!minecraft", value="for Subscriber", inline=False)
-        emb.add_field(name="!spotify", value="for Subscriber", inline=False)
-        emb.add_field(name="!fortnite", value="for Simple", inline=False)
-        emb.add_field(name="!uplay", value="for Simple", inline=False)
-        emb.add_field(name="!bot", value="see the coder of the bot", inline=False)
-        emb.add_field(name="!youtube", value="get the channel link", inline=False)
-        emb.add_field(name="!shop", value="get the shop link", inline=False)
-        emb.add_field(name="!rules", value="get the list of rules", inline=False)
-        emb.add_field(name="!simple", value="type **donate** in the chat to buy it!", inline=False)
-        emb.add_field(name="!refill minecraft fortnite spotify smc sspotify uplay nordvpn hulu", value="get the channel link", inline=False)
-        emb.add_field(name="donate", value="to buy the Simple rank", inline=False)
-        await client.send_message(message.author, embed=emb)
 
-    if message.content == "!rules":
-        emb = (discord.Embed(description="**Rules**", color=0x3DF270))
-        emb.add_field(name="1. | Swearing is strictly prohibited.", value="kick or mute", inline=False)
-        emb.add_field(name="2. | Don't advertise anything (Discord servers, Roblox groups, etc). DM Advertising is not allowed.", value="24h ban", inline=False)
-        emb.add_field(name="3. | Do not attempt to test or bypass the filter.", value="kick or mute", inline=False)
-        emb.add_field(name="4. | Disruptive behavior and controversial topics are not allowed (religion/politics). In addition: the obvious intent to provoke another member or start arguments is prohibited.", value="kick or mute", inline=False)
-        emb.add_field(name="5. | Staff impersonation is not allowed, if you change your name/profile picture, it will result in an automatic mute until things are fixed.", value="kick or mute", inline=False)
-        emb.add_field(name="6. | Harassing a user, lewd jokes, etc are not tolerated. If someone is harassing someone in your DMs please send proof to a moderator.", value="kick or mute", inline=False)
-        emb.add_field(name="7. | Do not ignore or argue with staff or moderators. ", value="kick or mute", inline=False)
-        emb.add_field(name="8. | Don't DDoS or DOS threaten anyone.", value="perma ban", inline=False)
-        emb.add_field(name="9. | Inappropriate Discord PFPs or usernames will not be tolerated. ", value="mute or kick", inline=False)
-        emb.add_field(name="10. | Do not ping Owners Please. If you see that we're busy and/if you need us just DM an Supervisor, they will help you.", value="mute", inline=False)
-        emb.add_field(name="11. | All staff members are to follow the same rules that all members follow, if any are seen misbehaving, it will result in an automatic demoting.", value="demoting", inline=False)
-        await client.send_message(message.channel, embed=emb)
+@spotify.error
+async def spotify_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await channel.send(f"You do not have enough permissions {member.mention}")
 
-    if message.content == "-verify":
-        emb = (discord.Embed(description="**Rules**", color=0x3DF270))
-        emb.add_field(name="1. | Swearing is strictly prohibited.", value="kick or mute", inline=False)
-        emb.add_field(name="2. | Don't advertise anything (Discord servers, Roblox groups, etc). DM Advertising is not allowed.", value="24h ban", inline=False)
-        emb.add_field(name="3. | Do not attempt to test or bypass the filter.", value="kick or mute", inline=False)
-        emb.add_field(name="4. | Disruptive behavior and controversial topics are not allowed (religion/politics). In addition: the obvious intent to provoke another member or start arguments is prohibited.", value="kick or mute", inline=False)
-        emb.add_field(name="5. | Staff impersonation is not allowed, if you change your name/profile picture, it will result in an automatic mute until things are fixed.", value="kick or mute", inline=False)
-        emb.add_field(name="6. | Harassing a user, lewd jokes, etc are not tolerated. If someone is harassing someone in your DMs please send proof to a moderator.", value="kick or mute", inline=False)
-        emb.add_field(name="7. | Do not ignore or argue with staff or moderators. ", value="kick or mute", inline=False)
-        emb.add_field(name="8. | Don't DDoS or DOS threaten anyone.", value="perma ban", inline=False)
-        emb.add_field(name="9. | Inappropriate Discord PFPs or usernames will not be tolerated. ", value="mute or kick", inline=False)
-        emb.add_field(name="10. | Do not ping Owners Please. If you see that we're busy and/if you need us just DM an Supervisor, they will help you.", value="mute", inline=False)
-        emb.add_field(name="11. | All staff members are to follow the same rules that all members follow, if any are seen misbehaving, it will result in an automatic demoting.", value="demoting", inline=False)
-        await client.send_message(message.channel, embed=emb)
+#FORTNITE
+#FORTNITE
+#FORTNITE
+#FORTNITE
 
-    if "-warn" in message.content.lower():
-        if "544184897674412067" in [role.id for role in message.author.roles]:
-            emb = (discord.Embed(description="**Warning**", color=0x3DF270))
-            emb.add_field(name="You have been warned", value="If you do this again you get a kick / ban", inline=False)
-            emb.add_field(name="Read our discord rules", value="rules are hier ❗»-rules", inline=True)
-            await client.send_message(message.channel, embed=emb)
-        else:
-            await client.send_message(message.channel, "You do not have enough permissions!")
+@client.command()
+@commands.has_permissions(send_messages=True)
+async def fortnite(ctx, member: discord.Member = None):
+    if not member:
+        await ctx.send("Please type you name! -fortnite @name")
+        return
+    channel = discord.utils.get(member.guild.channels, name="generator-log")
+    emb = (discord.Embed(description="Account Generator", color=0x2DF270))
+    emb.add_field(name=f"A user created a fortnite account", value=member.display_name, inline=False)
+    emb.add_field(name=f"and the id is {member.mention}", value="check it", inline=False)
+    await channel.send(embed=emb)
+    await ctx.send("I send a Account to your DMs, please wait a bit. (I do allown the accs so i cant  refill it all weekends)")
+    await asyncio.sleep(3)
+    choices = [
+        "I think you dont read our Bot infortmation, so we dont have any of fortnite accounts",
+    ]
+    rancoin = random.choice(choices)
+    await ctx.author.send(rancoin)
+    role = discord.utils.get(ctx.guild.roles, name="muted")
+    await member.add_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker Lite")
+    await member.remove_roles(role)
+    await asyncio.sleep(3600)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.add_roles(role)
 
-    if "-warn" in message.content.lower():
-        variable = message.content[len("-warn"):].strip()
-        await client.send_message(client.get_channel("556847944750333952"), variable)
+@fortnite.error
+async def fortnite_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await channel.send(f"You do not have enough permissions {member.mention}")
 
-    if "-report" in message.content.lower():
-        if "544184613795528705" in [role.id for role in message.author.roles]:
-            emb = (discord.Embed(description="**report**", color=0x3DF270))
-            emb.add_field(name="Your report was created", value="a team member will check it", inline=False)
-            await client.send_message(message.channel, embed=emb)
-        else:
-            await client.send_message(message.channel, "You do not have enough permissions!")
+#ROBLOX
+#ROBLOX
+#ROBLOX
+#ROBLOX
 
-    if message.content == "-report":
-        variable = message.content[len("-report"):].strip()
-        await client.send_message(client.get_channel("563742938685898803"), variable)
+@client.command()
+@commands.has_permissions(send_messages=True)
+async def roblox(ctx, member: discord.Member = None):
+    if not member:
+        await ctx.send("Please type you name! -roblox @name")
+        return
+    channel = discord.utils.get(member.guild.channels, name="generator-log")
+    emb = (discord.Embed(description="Account Generator", color=0x2DF270))
+    emb.add_field(name=f"A user created a roblox account", value=member.display_name, inline=False)
+    emb.add_field(name=f"and the id is {member.mention}", value="check it", inline=False)
+    await channel.send(embed=emb)
+    await ctx.send("I send a Account to your DMs, please wait a bit. (I do allown the accs so i cant  refill it all weekends)")
+    await asyncio.sleep(3)
+    choices = [
+        "I think you dont read our Bot infortmation, so we dont have any of roblox accounts",
+        "",
+        "",
+        "",
+        "",
+        "",
+    ]
+    rancoin = random.choice(choices)
+    await ctx.author.send(rancoin)
+    role = discord.utils.get(ctx.guild.roles, name="muted")
+    await member.add_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker Lite")
+    await member.remove_roles(role)
+    await asyncio.sleep(3600)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.add_roles(role)
 
-    if "-info" in message.content.lower():
-        variable = message.content[len("-info"):].strip()
-        await client.send_message(client.get_channel("544180648819032095"), variable)
+@client.command()
+@commands.has_permissions(send_messages=True)
+async def nordvpn(ctx, member: discord.Member = None):
+    if not member:
+        await ctx.send("Please type you name! -nordvpn @name")
+        return
+    channel = discord.utils.get(member.guild.channels, name="generator-log")
+    emb = (discord.Embed(description="Account Generator", color=0x2DF270))
+    emb.add_field(name=f"A user created a nordvpn account", value=member.display_name, inline=False)
+    emb.add_field(name=f"and the id is {member.mention}", value="check it", inline=False)
+    await channel.send(embed=emb)
+    await ctx.send("I send a Account to your DMs, please wait a bit. (I do allown the accs so i cant  refill it all weekends)")
+    await asyncio.sleep(3)
+    choices = [
+        "argelio.companioni@gmail.com:Argelio1",
+        "alexthegreat8994@gmail.com:Sevenhate9",
+        "noahjohnson15.nj@gmail.com:redline41",
+        "josh@joshprice.net:stamakA5",
+    ]
+    rancoin = random.choice(choices)
+    await ctx.author.send(rancoin)
+    role = discord.utils.get(ctx.guild.roles, name="muted")
+    await member.add_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker Lite")
+    await member.remove_roles(role)
+    await asyncio.sleep(3600)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.add_roles(role)
 
-    if "-info" in message.content.lower():
-        if "544184897674412067" in [role.id for role in message.author.roles]:
-            emb = (discord.Embed(description="**info**", color=0x3DF270))
-            emb.add_field(name="Discord info was senden an a team member", value="Thank you", inline=False)
-            await client.send_message(message.channel, embed=emb)
-        else:
-            await client.send_message(message.channel, "You do not have enough permissions!")
+@nordvpn.error
+async def nordvpn_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await channel.send(f"You do not have enough permissions {member.mention}")
 
-    if "https://discord.gg/" in message.content.lower():
-        if "544184839318929409" in [role.id for role in message.author.roles]:
-            await client.wait_for_message(timeout=1)
-        else:
-            await client.delete_message(message)
-            emb = (discord.Embed(description="**Warning**", color=0x3DF270))
-            emb.add_field(name="You have been warned", value="If you do this again you get a Mute", inline=False)
-            await client.send_message(message.channel, embed=emb)
+@client.command()
+@commands.has_permissions(send_messages=True)
+async def uplay(ctx, member: discord.Member = None):
+    if not member:
+        await ctx.send("Please type your name! -uplay @name")
+        return
+    channel = discord.utils.get(member.guild.channels, name="generator-log")
+    emb = (discord.Embed(description="Account Generator", color=0x2DF270))
+    emb.add_field(name=f"A user created a roblox account", value=member.display_name, inline=False)
+    emb.add_field(name=f"and the id is {member.mention}", value="check it", inline=False)
+    await channel.send(embed=emb)
+    await ctx.send("I send a Account to your DMs, please wait a bit. (I do allown the accs so i cant  refill it all weekends)")
+    await asyncio.sleep(3)
+    choices = [
+        "shelleysmith2010@yahoo.com:red123",
+        "michael_t@hughes.net:star69",
+        "brooksiejam@aol.com:Koncua",
+        "spartan_082@yahoo.com:daemon1",
+        "thgenisis@yahoo.com:annie2195",
+        "davwatts@bellsouth.net:clarkent",
+        "blakemostafa@yahoo.com:pebble11",
+        "soonersisk@yahoo.com:meg6468",
+        "mybabybek@yahoo.com:bradpitt1",
+        "corneliusdarionte@yahoo.com:ayanna",
+        "riaelvargos@yahoo.com:June4747",
+        "savagely_wicked@yahoo.com:kristen",
+        "somphs@yahoo.com:mansDievs1",
+        "mitchellstepp@yahoo.com:hpcomputer11",
+        "sabdar2008@yahoo.com:goten8910",
+        "patrick_jason12@yahoo.com:gsenjou10",
+        "buschman112@yahoo.com:heaven1",
+        "greed159@yahoo.com:Shadow1",
+        "frogoa@yahoo.com:lafrogo2",
+        "eugen_ciocea@yahoo.com:steaua",
+        "jonathancollier@ymail.com:collier",
+        "tony_vu94@yahoo.com:niffer12",
+        "davidesp00@yahoo.com:nicdavnicdav",
+        "orvilleide@yahoo.com:orv123",
+        "annmarie_truong@yahoo.com:123truong",
+        "friedman.david89@yahoo.com:Mymommy01",
+        "akeisaunders@yahoo.com:amoney24",
+        "iyskes@yahoo.com:packers",
+        "volaregear@yahoo.com:uela8bee",
+        "nbastreet4@yahoo.com:r0tten",
+        "nathan.krakowski@yahoo.com:brooklyn01",
+        "kreposa@comcast.net:Bellaluna",
+        "cristiandreig@yahoo.com:newronx",
+        "daravongsimon@yahoo.com:1xg56rty3",
+        "hockeygabe45@yahoo.com:lgialbye",
+        "guitarherolegend@sbcglobal.net:Coblivion2011",
+        "robertjbrown1996@yahoo.com:durarara",
+        "farkas.eduard@yahoo.com:Eduard12",
+        "a_powers14@yahoo.com:powers14",
+        "alecyurchenko@yahoo.com:232523op",
+        "jacob.steel@ntlworld.com:jacob2002",
+        "shannonpike2003@yahoo.com:Jesuschrist1",
+        "kobenlock@yahoo.com:joshua69",
+        "joe_baker1331@yahoo.com:bobflower",
+        "charliepena315@yahoo.com:MVP4life",
+        "descendantoftheson@yahoo.com:revival",
+        "guamae@yahoo.com:piesR4you",
+        "ngal2478@yahoo.com:Geltado99",
+        "kyogerfan@yahoo.com:ilovemom2",
+        "mandywerner@earthlink.net:1baker1",
+        "joelgrant_au@yahoo.com:bluesky76",
+        "chase@comcast.net:chase1",
+        "thiantairas@yahoo.com:br1g4ndin3",
+        "medic.stat@earthlink.net:1st508th",
+        "mattpurcell39@yahoo.com:bmxrox11",
+        "ethan134@yahoo.com:1cedcoffee",
+        "costymen1996@yahoo.com:sharian2",
+        "sirross1117@yahoo.com:crowfoot",
+        "rossamaxwell29@yahoo.com:925raglov",
+        "stadiumpulse@yahoo.com:shannen1",
+        "oguillemette@yahoo.com:legoland",
+        "daelarr789@yahoo.com:dave1963",
+        "da.wongman@yahoo.com:kingz250",
+        "mrhigh@comcast.net:1webster",
+        "ajmiller0802@yahoo.com:blueeulb02",
+        "bassettpro@yahoo.com:Marijuana1",
+        "nysnowduzie@aol.com:rra6rom7669",
+        "loganbeck492@yahoo.com:Baseball4",
+        "dextariushero@yahoo.com:dna0799",
+        "lukeellerbrook@yahoo.com:green2",
+        "chipnash.5777@yahoo.com:sapphire75",
+        "elijah.joki@yahoo.com:jellybean1",
+        "bennyroyer@yahoo.com:Br8366",
+        "lleaty@yahoo.com:Mickey25",
+        "djstyle64@yahoo.com:sirstyles",
+        "dyurteyevroman@yahoo.com:roman483",
+        "tpun423@yahoo.com:mustang3",
+        "shane.perry11@yahoo.com:Murphy123",
+        "ssenter@charter.net:optics1",
+        "pspimptha1st@yahoo.com:daredevil1",
+        "presidentcalvin2@yahoo.com:moux26",
+        "cameash2009@yahoo.com:hackin",
+        "alexandra.elisa@yahoo.com:mancare",
+        "jmm165@yahoo.com:digger6354",
+        "kirbydog01@fuse.net:agincourt1",
+        "alan.hulme3@ntlworld.com:laura211",
+        "aznswagga203@yahoo.com:danielm1",
+        "genasbusiness@yahoo.com:cheech",
+        "justin_tic@yahoo.com:522522jt",
+        "stan_daniel_marian@yahoo.com:maistro1",
+        "bwong247@yahoo.com:bballer23",
+        "jacksontabscott@rocketmail.com:Spike123",
+        "ghost_eg_man@yahoo.com:assem123",
+        "flashpoint911944@yahoo.com:domi1994",
+        "kevinisawesome@bellsouth.net:thermal516122",
+        "bilavioleta@yahoo.com:9nepasa",
+        "jaswilkins@msn.com:LoLyo123",
+        "gnjprice@msn.com:karson3323",
+        "justanigga530@yahoo.com:Darkman1985",
+        "ionut_stavarachi@yahoo.com:0080090071io",
+        "bananaideala@yahoo.com:karina",
+        "droppinjbombs@yahoo.com:J3ss3wil",
+        "burkhaltermax@yahoo.com:vexy14289",
+        "snipekg@yahoo.com:lol0lol",
+        "cyberspaceboy@frontier.com:oldfart13",
+        "kylepetersen48@yahoo.com:kyle98",
+        "dylan.mincks@yahoo.com:flager500",
+        "chrisrodier69@yahoo.com:water1",
+        "reggie_183@yahoo.com:roadrunner18",
+        "towerman5445@yahoo.com:ruby12",
+        "beaugarbers@yahoo.com:adidas88",
+        "a9300455@yahoo.com:peekaboo",
+        "cyrusconnor2109@yahoo.com:cisco2109",
+        "koda_hobby@yahoo.com:pimping15",
+        "big_mo3@yahoo.com:hanan6xy",
+        "jamiem753@earthlink.net:67chevelle",
+        "nicolaswohr@yahoo.com:nick2mlt3",
+        "pmarasciulo@yahoo.com:maggio",
+        "mirali56@yahoo.com:alisaif567",
+        "nichitaviorel@yahoo.com:nvg1234",
+        "FabHyd69@yahoo.com:violet69",
+        "dtownpimpinfoever@yahoo.com:wac3310",
+        "lerej1@yahoo.com:nwadis1",
+        "pokemon2241@yahoo.com:kenshin1",
+        "loc93loc93@yahoo.com:Locpro93",
+        "arsbrocca@yahoo.com:totalninety",
+        "annlall@rocketmail.com:zkp123",
+        "fillyfranks@yahoo.com:keaton09",
+        "jaquariuscarothers@yahoo.com:buggy1",
+        "phr33rsmembership@yahoo.com:potato123",
+        "saro_sharma67@yahoo.com:sharma22",
+        "spencerrock80@yahoo.com:foxbody",
+        "royv722@yahoo.com:Rv112385",
+        "mcgown.lewis@yahoo.com:emirates380",
+        "justinneireiter@yahoo.com:Daniel18",
+        "robin.gjerde@mail.com:Genser123",
+        "divine457@comcast.net:runescape12",
+        "brandon.hayter@yahoo.com:linkrulz1",
+        "mexside_maniac@yahoo.com:MasterM2",
+        "nicusorsimion07@yahoo.com:cristi",
+        "coltonmcghee@yahoo.com:Godrocks23",
+        "sher3897@yahoo.com:cudsue",
+        "mikel87@yahoo.com:berlin87",
+        "florawoods@ymail.com:sparkles",
+        "batulio27@yahoo.com:theone27",
+        "stanescuolimpiu@yahoo.com:arsinel",
+        "ernlopez2000@yahoo.com:zepole",
+        "sharpay333@att.net:Wildcats33",
+        "sequel74501@yahoo.com:Fuck4758",
+        "jrcorriere2002@yahoo.com:jcizzle301",
+        "david_estep1981@yahoo.com:allie1006",
+        "descurvydog805@yahoo.com:Monkey01",
+        "isaacbrown955@yahoo.com:Radiation955",
+        "alex19051988@yahoo.com:ciomu19051988",
+        "hunterwedell@yahoo.com:reggy22",
+        "nasimmons84@yahoo.com:Coward121",
+        "adi21costi@yahoo.com:daniela",
+        "michael.a.roberts@me.com:starswimmer93",
+        "noid732@comcast.net:myluck1",
+        "inly_damien@yahoo.com:naimadpop89",
+        "abdirahmanwardere@yahoo.com:123abc",
+        "tibi_tokos@yahoo.com:denisa",
+        "nwb23uk@yahoo.com:transport",
+        "joakin.angulo@yahoo.com:parasito",
+        "mikelboomhower@yahoo.com:s310sg",
+        "ninjadj11@aol.com:karate10",
+        "cyann21@yahoo.com:jason73",
+        "rd4in98@aol.com:cancun",
+        "dorothyreid@msn.com:totototo",
+        "hunterp0123@yahoo.com:Number60",
+        "messager0013@aol.com:bbborgne13",
+        "fabian_lancea@yahoo.com:aecnal",
+        "coldaqua01@yahoo.com:heward11",
+        "jailyn811@yahoo.com:william20",
+        "deliobaeta@gmail.com:dio050181",
+        "robertitoo@aol.com:Zaq12wsx",
+        "nazeembenzainal@gmail.com:nazeem1999",
+        "jacob4yq1@hotmail.com:Je159418",
+        "snmfarr@hotmail.com:mayatony146",
+        "spevin@o2.pl:apparition",
+        "will.smither@mail.com:merlin11",
+        "zuzka65@inmail.sk:zuzka65",
+        "xx-enzoo-xx@hotmail.fr:cacacul01",
+        "minibish21@hotmail.com:madbird",
+        "kamileczekd95@o2.pl:undercover95",
+        "chris.harcar@yahoo.com:perfect12",
+        "cigeljgoran@yahoo.com:klopkosenegal",
+        "forrestmoffat@yahoo.com:Addison9",
+        "jacob.daniels38@yahoo.com:buster",
+        "alikhsanclub@yahoo.com:bobobo7957",
+        "r_norman48@att.net:budlight1",
+        "templar.jenkies@yahoo.com:m71833",
+        "marinecam2@hotmail.fr:Partenaire12",
+        "petarr.horvat@yahoo.com:sollozzoo",
+        "naiosulmasio@yahoo.com:cv1230",
+        "mbrazzeal@yahoo.com:elostar3355",
+        "arturslava2008@gmail.com:123124artur",
+        "javiercamarenalozano@gmail.com:3helados",
+        "danidanut98@yahoo.com:sebysan23",
+        "adamgrusky@msn.com:Koolanole9",
+        "ps701@yahoo.com:Great1916",
+        "jun1orsr@yahoo.com:Santo213",
+        "janecpix@yahoo.com:Cairnan6",
+        "greg.fourseff@hotmail.fr:15mars1976",
+        "gregory9972@wp.pl:hummerh2",
+        "mephasto@freemail.hu:ae718075",
+        "dmcdilda@comcast.net:35722k",
+        "revolution25@hotmail.fr:bonemouth",
+        "me_z00t@yahoo.com:immortal1",
+        "mirela.bucur@rocketmail.com:parola555",
+        "kschanda_jr@yahoo.com:Ks1069262871",
+        "sp.eminem@centrum.cz:pppooonnnyyy",
+        "paparakeshreddy2014@gmail.com:7660050279p",
+        "shadowblade10000@yahoo.com:blade77521",
+        "brajan.krzeminski@interia.pl:lego123ooo",
+        "uthaleabhi@gmail.com:kehsihba1681994",
+        "baugustova@seznam.cz:cholera",
+        "mikeshomework2006@earthlink.net:kenny123",
+        "morhe24@onet.eu:dwarf24",
+        "smileycaleb@outlook.com:Chicago1",
+        "midget810@comcast.net:creeper810",
+        "simax_khiyaboon@yahoo.com:akpkreno",
+        "flaviusemilian@yahoo.com:matryx1",
+        "zachman.117@sbcglobal.net:Swindall117",
+        "castoraz@hotmail.com:orazio54",
+        "trixtora@mail.com:ceNzor",
+        "thomas.saxton@ntlworld.com:atl290786",
+        "goldrism@aol.com:father08",
+        "comprat@takas.lt:hacker",
+        "gpitelen@msn.com:dover1995",
+        "tyler.amy@windstream.net:emmajo721",
+        "alessandro.ragnoli@alice.it:jaco1999",
+    ]
+    rancoin = random.choice(choices)
+    await ctx.author.send(rancoin)
+    role = discord.utils.get(ctx.guild.roles, name="muted")
+    await member.add_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker")
+    await member.remove_roles(role)
+    role = discord.utils.get(ctx.guild.roles, name="Cracker Lite")
+    await member.remove_roles(role)
+    await asyncio.sleep(3600)
+    role = discord.utils.get(ctx.guild.roles, name="User")
+    await member.add_roles(role)
 
-    if "@everyone" in message.content.lower():
-        if "544184897674412067" in [role.id for role in message.author.roles]:
-            await client.wait_for_message(timeout=1)
-        else:
-            await client.delete_message(message)
-            emb = (discord.Embed(description="**Warning**", color=0x3DF270))
-            emb.add_field(name="You have been warned", value="If you do this again you get a Mute", inline=False)
-            await client.send_message(message.channel, embed=emb)
+@uplay.error
+async def uplay_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await channel.send(f"You do not have enough permissions {member.mention}")
 
-    if "-refill minecraft" in message.content.lower():
-        emb = (discord.Embed(description="**REFILL**", color=0x3DF270))
-        emb.add_field(name="Minecraft", value="need refill", inline=False)
-        await client.send_message(client.get_channel("557199613954621501"), embed=emb)
+@uplay.error
+async def uplay_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await channel.send(f"You do not have enough permissions {member.mention}")
 
-    if "-refill smc" in message.content.lower():
-        emb = (discord.Embed(description="**REFILL**", color=0x3DF270))
-        emb.add_field(name="smc", value="need refill", inline=False)
-        await client.send_message(client.get_channel("557199613954621501"), embed=emb)
+@client.command()
+async def gen(ctx):
+    emb = (discord.Embed(description="SimpleGenerator Help", color=0x2DF270))
+    emb.set_author(name="7sek")
+    emb.add_field(name="-spotify", value="generate a spotify account", inline=False)
+    emb.add_field(name="-fortnite", value="generate a fortnite account", inline=False)
+    emb.add_field(name="-roblox", value="generate a roblox account", inline=False)
+    emb.add_field(name="-minecraft", value="generate a minecraft account", inline=False)
+    emb.add_field(name="-uplay", value="generate a uplay account", inline=False)
+    emb.set_thumbnail(url="https://media.discordapp.net/attachments/399575754012229632/579027145628844033/8sek.png?width=676&height=676")
+    await ctx.send(embed=emb)
 
-    if "-refill fortnite" in message.content.lower():
-        emb = (discord.Embed(description="**REFILL**", color=0x3DF270))
-        emb.add_field(name="Fortnite", value="need refill", inline=False)
-        await client.send_message(client.get_channel("557199613954621501"), embed=emb)
-
-    if "-shop" in message.content.lower():
-        emb = (discord.Embed(description="**Shop**", color=0x3DF270))
-        emb.add_field(name="Accounts and more", value="https://shoppy.gg/@SimpleCrack", inline=False)
-        await client.send_message(message.channel, embed=emb)
-
-    if "-ycode" in message.content.lower():
-        emb = (discord.Embed(description="**Shop yCode**", color=0x3DF270))
-        emb.add_field(name="Accounts and more", value="https://shoppy.gg/@SimpleCrack", inline=False)
-        await client.send_message(message.channel, embed=emb)
-
-    if "-refill hulu" in message.content.lower():
-        emb = (discord.Embed(description="**REFILL**", color=0x3DF270))
-        emb.add_field(name="Hulu", value="need refill", inline=False)
-        await client.send_message(client.get_channel("557199613954621501"), embed=emb)
-
-    if "-refill spotify" in message.content.lower():
-        emb = (discord.Embed(description="**REFILL**", color=0x3DF270))
-        emb.add_field(name="Spotify", value="need refill", inline=False)
-        await client.send_message(client.get_channel("557199613954621501"), embed=emb)
-
-    if "-refill sspotify" in message.content.lower():
-        emb = (discord.Embed(description="**REFILL**", color=0x3DF270))
-        emb.add_field(name="sspotify", value="need refill", inline=False)
-        await client.send_message(client.get_channel("557199613954621501"), embed=emb)
-
-    if "-refill uplay" in message.content.lower():
-        emb = (discord.Embed(description="**REFILL**", color=0x3DF270))
-        emb.add_field(name="Uplay", value="need refill", inline=False)
-        await client.send_message(client.get_channel("557199613954621501"), embed=emb)
-
-    if message.content == "-refill":
-        emb = (discord.Embed(description="**REFILL**", color=0x3DF270))
-        emb.add_field(name="False! Put an account behind it", value="-refill account", inline=False)
-        await client.send_message(message.channel, embed=emb)
-
-    if message.content == "!gen":
-        await client.send_message(message.channel, "Prefix=! `spotify` `minecraft` `fortnite` `smc` `uplay` `hulu` `nordvpn` `sspotify`")
-
-    if message.content == "!bot":
-        await client.send_message(message.channel, "Bot by **@yCode.#5813**")
-
-    if message.content == "verify":
-        await client.send_message(message.channel, "[False] -> Type -verify and agree our rules")
-
-    if message.content == "!verify":
-        await client.send_message(message.channel, "[False] -> Type -verify and agree our rules")
-
-    if message.content == "!yt":
-        await client.send_message(message.author, "https://www.youtube.com/channel/UCJ72npfPcr_nyCMaevbU7cQ?view_as=subscriber")
-
-    if message.content == "!subscriber":
-        await client.send_message(message.author, "https://www.youtube.com/channel/UCJ72npfPcr_nyCMaevbU7cQ?view_as=subscriber")
-
-    if message.content == "!instagram":
-        await client.send_message(message.channel, "https://www.instagram.com/tradeandsellmarket")
-
-    if message.content.lower().startswith("-verify"):
-        if "547423541902049294" in [role.id for role in message.author.roles]:
-            botmsg = await client.send_message(message.channel, "Agree or disagree")
-        else:
-            botmsg = await client.send_message(message.channel, "`You are Verifyed!`")
-
-        await client.add_reaction(botmsg, "✔")
-        await client.add_reaction(botmsg, "❌")
-
-        global testmsgid
-        testmsgid = botmsg.id
-
-        global testmsguser
-        testmsguser = message.author
-
-@client.event
-async def on_reaction_add(reaction, user):
-    msg = reaction.message
-    chat = reaction.message.channel
-
-    if reaction.emoji == "✔" and msg.id == testmsgid and user == testmsguser:
-        role = discord.utils.find(lambda r: r.name == "Member", msg.server.roles)
-        await client.add_roles(user, role)
-
-    if reaction.emoji == "✔" and msg.id == testmsgid and user == testmsguser:
-        await client.wait_for_message(timeout=3)
-        role = discord.utils.find(lambda r: r.name == "NonVerified", msg.server.roles)
-        await client.remove_roles(user, role)
-        await client.send_message(chat, "✅ `FINISH`")
-
-    if reaction.emoji == "❌" and msg.id == testmsgid and user == testmsguser:
-        await client.send_message(chat, "❎")
-
-@client.event
-async def on_member_join(member):
-        role = discord.utils.get(member.server.roles, name="NonVerified")
-        await client.add_roles(member, role)
-
-client.run("NTQ2MDc0OTEyMTAwNzEyNDQ4.XK8wGw.fS13t3uJeSwD055nvu3QJpSiies")
+client.run("NTgzMjg1NzM1MDQ2NTEyNjYw.XO6OdQ.6wbf1XObMT7Dt82Buy1DACYDBdo")
